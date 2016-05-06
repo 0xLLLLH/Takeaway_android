@@ -1,17 +1,23 @@
-*.iml
-.gradle
-/local.properties
-/.idea/workspace.xml
-/.idea/libraries
-.DS_Store
-/build
-/captures
 ### Linux template
 *~
 
 # temporary files which can be created if a process still has a handle open of a deleted file
 .fuse_hidden*
 
+### Gradle template
+.gradle
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# Cache of project
+.gradletasknamecache
+
+# # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
+# gradle/wrapper/gradle-wrapper.properties
 # KDE directory preferences
 .directory
 
@@ -53,6 +59,7 @@ proguard/
 captures/
 
 # Intellij
+*.iml
 
 # Keystore files
 *.jks
