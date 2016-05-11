@@ -1,74 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorGrey"
     tools:context="com.xllllh.android.takeaway.LoginActivity">
 
+    <com.xllllh.android.takeaway.TopBar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topbar_height"
+        custom:titleIcon="@mipmap/arrow_left"
+        custom:titleText="返回"
+        custom:titleTextSize="@dimen/topbar_title_text_size"
+        custom:titleBackground="@null"
+        custom:menuText="立即注册"
+        custom:menuTextSize="@dimen/topbar_menu_text_size"
+        custom:menuBackground="@null"
+        custom:textColor="@color/colorTextDefault"
+        android:background="@android:color/white"
+        android:elevation="2dp">
+    </com.xllllh.android.takeaway.TopBar>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/colorPrimary">
+        android:elevation="0dp">
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@color/colorPrimary"
-            android:text="@string/header_back"
-            android:textColor="@color/colorTextInPrimaryColor"
-            android:textSize="@dimen/header_text_size"
-            android:layout_gravity="start"/>
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorGrey"
+            android:layout_weight="1"
+            android:elevation="0dp"
+            android:text="快速登陆"/>
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@color/colorPrimary"
-            android:text="@string/header_back"
-            android:textColor="@color/colorTextInPrimaryColor"
-            android:textSize="@dimen/header_text_size"
-            android:layout_gravity="end"
-            android:singleLine="true" />
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:layout_weight="1"
+            android:elevation="0dp"
+            android:text="账号密码登陆"/>
+
     </LinearLayout>
-    <TabHost
-        android:id="@android:id/tabhost"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
+        <EditText
+            android:id="@+id/username"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-            <TabWidget
-                android:id="@android:id/tabs"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </TabWidget>
-            <FrameLayout
-                android:id="@android:id/tabcontent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <LinearLayout
-                    android:id="@+id/tab1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-                    <Button
-                        android:id="@+id/button1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="第一个Tab选项卡" />
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:background="@null"
+            android:drawableStart="@mipmap/ic_user"
+            android:minHeight="50dp"
+            android:hint="输入用户名"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorGrey"/>
+        <EditText
+            android:id="@+id/password"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:background="@null"
+            android:drawableStart="@mipmap/ic_pass"
+            android:minHeight="50dp"
+            android:hint="输入密码"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:text="登陆"
+            android:textColor="@color/colorTextInPrimaryColor"
+            android:textSize="22sp"/>
+        <Button
+            android:layout_marginTop="5dp"
+            android:layout_gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="找回密码"
+            android:textColor="@color/colorTextDefault"
+            android:background="@color/colorGrey"
+            android:elevation="0dp"
+            android:padding="0dp"/>
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/third_part"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/third_part_button"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:text="第三方账号登陆"
+            android:drawableTop="@mipmap/pic_ns"
+            android:padding="5dp"/>
+    </RelativeLayout>
 
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/tab2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <Button
-                        android:id="@+id/button2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="第二个Tab选项卡" />
-
-                </LinearLayout>
-            </FrameLayout>
-        </LinearLayout>
-    </TabHost>
 </LinearLayout>

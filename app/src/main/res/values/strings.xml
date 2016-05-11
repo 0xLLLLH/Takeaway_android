@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Takeaway</string>
     <string name="header_back">返回</string>
+    <string name="error_field_required">必须填写此项</string>
+    <string name="error_invalid_account">用户名不合法</string>
+    <string name="error_invalid_password">密码不合法</string>
 </resources>

@@ -4,16 +4,18 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
 /**
- * Created by mephist0 on 16-5-11.
+ * Created by 0xLLLLH on 16-5-11.
  */
 public class TopBar extends RelativeLayout {
 
     Button mTitleButton;
+    Drawable mTitleIcon;
     String mTitleText;
     float mTitleTextSize;
     int mTitleTextColor;
@@ -21,11 +23,13 @@ public class TopBar extends RelativeLayout {
     LayoutParams mTitleParams;
 
     Button mMenuButton;
+    Drawable mMenuIcon;
     String mMenuText;
     float mMenuTextSize;
     int mMenuTextColor;
     Drawable mMenuBackground;
     LayoutParams mMenuParams;
+    topbarClickListener mListener;
 
     public TopBar(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -33,15 +37,17 @@ public class TopBar extends RelativeLayout {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TopBar);
 
         //get attrs of title
+        mTitleIcon = typedArray.getDrawable(R.styleable.TopBar_titleIcon);
         mTitleText = typedArray.getString(R.styleable.TopBar_titleText);
         mTitleTextSize = typedArray.getDimension(R.styleable.TopBar_titleTextSize, 10);
-        mTitleTextColor = typedArray.getColor(R.styleable.TopBar_titleTextColor, 0);
+        mTitleTextColor = typedArray.getColor(R.styleable.TopBar_textColor, 0);
         mTitleBackground = typedArray.getDrawable(R.styleable.TopBar_titleBackground);
 
         //get attrs of menu
+        mMenuIcon = typedArray.getDrawable(R.styleable.TopBar_menuIcon);
         mMenuText = typedArray.getString(R.styleable.TopBar_menuText);
         mMenuTextSize = typedArray.getDimension(R.styleable.TopBar_menuTextSize, 10);
-        mMenuTextColor = typedArray.getColor(R.styleable.TopBar_menuTextColor, 0);
+        mMenuTextColor = typedArray.getColor(R.styleable.TopBar_textColor, 0);
         mMenuBackground = typedArray.getDrawable(R.styleable.TopBar_menuBackground);
 
         //Should call recycle method after using
@@ -51,10 +57,16 @@ public class TopBar extends RelativeLayout {
         mMenuButton = new Button(context);
 
         //set attrs of title
+        if (mTitleIcon!=null)
+            mTitleIcon.setBounds(0,0,2*mTitleIcon.getMinimumWidth(),2*mTitleIcon.getMinimumHeight());//size to display, it's necessary
+        mTitleButton.setCompoundDrawables(mTitleIcon,null,null,null);
         mTitleButton.setText(mTitleText);
+        mTitleButton.setTextAlignment(TEXT_ALIGNMENT_TEXT_START);
         mTitleButton.setTextColor(mTitleTextColor);
         mTitleButton.setTextSize(mTitleTextSize);
         mTitleButton.setBackground(mTitleBackground);
+        mTitleButton.setElevation(0);
+        mTitleButton.setPadding(0,0,0,0);
 
         //add view
         mTitleParams = new LayoutParams(
@@ -64,20 +76,55 @@ public class TopBar extends RelativeLayout {
         addView(mTitleButton,mTitleParams);
 
         //set attrs of menu
+        if (mMenuIcon!=null)
+            mMenuIcon.setBounds(0,0,2*mMenuIcon.getMinimumWidth(),2*mMenuIcon.getMinimumHeight());//size to display, it's necessary
+        mMenuButton.setCompoundDrawables(mMenuIcon,null,null,null);
         mMenuButton.setText(mMenuText);
         mMenuButton.setTextColor(mMenuTextColor);
         mMenuButton.setTextSize(mMenuTextSize);
         mMenuButton.setBackground(mMenuBackground);
+        mMenuButton.setElevation(0);
+        mMenuButton.setPadding(0,0,0,0);
 
         mMenuParams = new LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
         mMenuParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, TRUE);
         addView(mMenuButton,mMenuParams);
+
+        mTitleButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.titleClick();
+            }
+        });
+        mMenuButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.menuClick();
+            }
+        });
     }
 
     public interface topbarClickListener{
         void titleClick();
-        void memueClick();
+        void menuClick();
+    }
+
+    public void setOnTopbarClickListener(topbarClickListener mListener){
+        this.mListener = mListener;
+    }
+
+    public void setTitleButtonVisible(boolean visible){
+        if (visible)
+            mTitleButton.setVisibility(View.VISIBLE);
+        else
+            mTitleButton.setVisibility(View.GONE);
+    }
+    public void setMenuButtonVisible(boolean visible){
+        if (visible)
+            mMenuButton.setVisibility(View.VISIBLE);
+        else
+            mMenuButton.setVisibility(View.GONE);
     }
 }
