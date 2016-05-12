@@ -84,6 +84,7 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp">
         <Button
+            android:id="@+id/login_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
@@ -97,8 +98,8 @@
             android:layout_height="wrap_content"
             android:text="找回密码"
             android:textColor="@color/colorTextDefault"
-            android:background="@color/colorGrey"
-            android:elevation="0dp"
+            android:background="@android:color/transparent"
+            android:elevation="0px"
             android:padding="0dp"/>
     </LinearLayout>
     <RelativeLayout
@@ -109,11 +110,18 @@
             android:id="@+id/third_part_button"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:background="@android:color/white"
             android:text="第三方账号登陆"
-            android:drawableTop="@mipmap/pic_ns"
-            android:padding="5dp"/>
+            android:textSize="10sp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@id/third_part_button"
+            android:layout_marginBottom="-4dp"
+            android:background="@mipmap/pic_ns"/>
+
     </RelativeLayout>
 
 </LinearLayout>
