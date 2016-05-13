@@ -32,28 +32,29 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:padding="12dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:background="@android:color/white"
         android:elevation="1dp">
         <Button
             android:id="@+id/button_wallet"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:drawableTop="@mipmap/v7"
+            android:layout_height="wrap_content"
+            android:drawableTop="@mipmap/wallet"
             android:text="我的钱包"
             android:background="@android:color/white"/>
         <ImageView
             android:layout_width="1dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/colorGrey" />
         <Button
             android:id="@+id/button_red_pocket"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:drawableTop="@mipmap/rq"
+            android:drawableTop="@mipmap/red_pocket"
             android:text="红包"
             android:background="@android:color/white"/>
         <ImageView
@@ -64,8 +65,8 @@
             android:id="@+id/button_voucher"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:drawableTop="@mipmap/u0"
+            android:layout_height="wrap_content"
+            android:drawableTop="@mipmap/voucher"
             android:text="代金券"
             android:background="@android:color/white"/>
     </LinearLayout>
@@ -83,7 +84,11 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/usercenter_menu_height"
             android:background="@android:color/white"
-            android:elevation="0dp"/>
+            android:elevation="0dp"
+            android:text="我的评价"
+            android:textAlignment="textStart"
+            android:drawableStart="@mipmap/ic_comment"
+            android:drawableEnd="@mipmap/menu_arrow_right"/>
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -92,7 +97,11 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/usercenter_menu_height"
             android:background="@android:color/white"
-            android:elevation="0dp"/>
+            android:elevation="0dp"
+            android:text="我的收藏"
+            android:textAlignment="textStart"
+            android:drawableStart="@mipmap/ic_favor"
+            android:drawableEnd="@mipmap/menu_arrow_right"/>
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -101,6 +110,30 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/usercenter_menu_height"
             android:background="@android:color/white"
-            android:elevation="0dp"/>
+            android:elevation="0dp"
+            android:text="我的地址"
+            android:textAlignment="textStart"
+            android:drawableStart="@mipmap/ic_address"
+            android:drawableEnd="@mipmap/menu_arrow_right"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:elevation="1dp">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/usercenter_menu_height"
+            android:background="@android:color/white"
+            android:elevation="0dp"
+            android:text="更多"
+            android:textAlignment="textStart"
+            android:drawableStart="@mipmap/ic_etc"
+            android:drawableEnd="@mipmap/menu_arrow_right"/>
     </LinearLayout>
 </LinearLayout>
