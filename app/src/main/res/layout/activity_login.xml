@@ -113,7 +113,8 @@
             android:layout_height="30dp"
             android:background="@android:color/white"
             android:text="第三方账号登陆"
-            android:textSize="10sp"/>
+            android:textSize="10sp"
+            android:textColor="@color/colorTextDefault"/>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
