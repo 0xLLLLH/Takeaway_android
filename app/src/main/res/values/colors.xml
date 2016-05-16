@@ -6,4 +6,5 @@
     <color name="colorTextInPrimaryColor">#efefef</color>
     <color name="colorTextDefault">#333333</color>
     <color name="colorGrey">#eeeeee</color>
+    <color name="colorTabBackground">@android:color/white</color>
 </resources>
