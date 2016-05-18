@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -35,7 +36,13 @@ public class SampleFragmentPagerAdapter extends FragmentPagerAdapter{
 
     @Override
     public Fragment getItem(int position) {
-        return PageFragment.newInstance(position + 1);
+        switch (position){
+            case 0:return HomeFragment.newInstance();
+            case 1:return OrderListFragment.newInstance();
+            case 2:return UsercenterFragment.newInstance();
+        }
+        Log.d("FragmentPagerAdapter","Can't find corresponding fragment");
+        return null;
     }
 
     @Override
