@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <!--<color name="colorPrimary">#3F51B5</color>-->
+    <color name="colorPrimary">#FFD700</color>
+    <color name="colorPrimaryDark">#FFD700</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorTextInPrimaryColor">#efefef</color>
+    <color name="colorTextInPrimaryColor">#8B6914</color>
     <color name="colorTextDefault">#333333</color>
     <color name="colorGrey">#eeeeee</color>
     <color name="colorTabBackground">@android:color/white</color>

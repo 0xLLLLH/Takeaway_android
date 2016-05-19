@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/topbar_height"
         custom:titleIcon="@mipmap/arrow_left"
-        custom:titleText="返回"
+        custom:titleText="登陆"
         custom:titleTextSize="@dimen/topbar_title_text_size"
         custom:titleBackground="@null"
         custom:menuText="立即注册"

@@ -11,5 +11,6 @@
         <attr name="menuTextSize" format="dimension"/>
         <attr name="titleBackground" format="reference|color"/>
         <attr name="menuBackground" format="reference|color"/>
+
     </declare-styleable>
 </resources>

@@ -3,11 +3,16 @@ package com.xllllh.android.takeaway;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.view.ViewCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -24,6 +29,8 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
+
+        Utils.setStatusBarColor(this,Color.rgb(0,0,0),true);
 
         mTopBar = (TopBar) findViewById(R.id.topbar);
         mTopBar.setOnTopbarClickListener(new TopBar.topbarClickListener() {
@@ -60,6 +67,7 @@ public class LoginActivity extends Activity {
             }
         });
     }
+
 
     /**
      * Attempt to login.

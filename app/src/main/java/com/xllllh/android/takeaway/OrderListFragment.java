@@ -56,8 +56,6 @@ public class OrderListFragment extends Fragment {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Toast.makeText(getActivity(),"you have to login",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(),LoginActivity.class);
                 startActivity(intent);
             }
