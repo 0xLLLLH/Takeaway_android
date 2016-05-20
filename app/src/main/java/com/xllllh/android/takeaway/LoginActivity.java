@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
 import android.text.TextUtils;
@@ -15,9 +16,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class LoginActivity extends Activity {
 
+    private UserLoginTask mAuthTask = null;
     TopBar mTopBar;
     EditText mUsername, mPassword;
     Button mLogin;
@@ -116,16 +119,12 @@ public class LoginActivity extends Activity {
             focusView.requestFocus();
         }
         else {
-            showProgress(true);
             //start login progress
             //TODO:start login thread here, AsyncTask is advisable.
             Log.d("LoginActivity", "Start login");
 
-
-            showProgress(false);
-            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-            startActivity(intent);
-
+            mAuthTask = new UserLoginTask(account,password);
+            mAuthTask.execute();
         }
 
     }
@@ -156,5 +155,57 @@ public class LoginActivity extends Activity {
         if (TextUtils.isEmpty(password)||password.length()< minimumPasswordLength)
             return false;
         return true;
+    }
+    /**
+     * Represents an asynchronous login/registration task used to authenticate
+     * the user.
+     */
+    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+
+        private final String email;
+        private final String password;
+
+        UserLoginTask(String email, String password) {
+            this.email = email;
+            this.password = password;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            showProgress(true);
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            boolean result=false;
+            try {
+                result = UserUtils.getInstance().login(email,password);
+            } catch (Exception e) {
+                return false;
+            }
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(final Boolean success) {
+            mAuthTask = null;
+            showProgress(false);
+
+            if (success) {
+                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                startActivity(intent);
+                Toast.makeText(LoginActivity.this,"登陆成功",Toast.LENGTH_SHORT).show();
+            } else {
+                mPassword.setError(getString(R.string.error_invalid_password));
+                mPassword.requestFocus();
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+            mAuthTask = null;
+            showProgress(false);
+        }
     }
 }

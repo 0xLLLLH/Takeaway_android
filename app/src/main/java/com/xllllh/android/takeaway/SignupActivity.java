@@ -4,17 +4,17 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.support.v7.app.AppCompatActivity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 public class SignupActivity extends Activity {
 
+    private UserSignupTask mSignUpTask = null;
     TopBar mTopBar;
     EditText mUsername, mPassword,mConfirm;
     Button mSignUp;
@@ -130,16 +130,11 @@ public class SignupActivity extends Activity {
             focusView.requestFocus();
         }
         else {
-            showProgress(true);
             //start login progress
-            //TODO:start login thread here, AsyncTask is advisable.
             Log.d("SignupActivity", "Start signup");
 
-
-            showProgress(false);
-            Intent intent = new Intent(SignupActivity.this,MainActivity.class);
-            startActivity(intent);
-
+            mSignUpTask = new UserSignupTask(account,password);
+            mSignUpTask.execute();
         }
 
     }
@@ -153,7 +148,7 @@ public class SignupActivity extends Activity {
         if (show) {
             dialog=new ProgressDialog(this);
             dialog.setCancelable(false);
-            dialog.setTitle("登录中...");
+            dialog.setTitle("注册中...");
             dialog.setMessage("请稍等");
             dialog.show();
         }
@@ -170,5 +165,56 @@ public class SignupActivity extends Activity {
         if (TextUtils.isEmpty(password)||password.length()< minimumPasswordLength)
             return false;
         return true;
+    }
+    /**
+     * Represents an asynchronous login/registration task used to authenticate
+     * the user.
+     */
+    public class UserSignupTask extends AsyncTask<Void, Void, Boolean> {
+
+        private final String email;
+        private final String password;
+
+        UserSignupTask(String email, String password) {
+            this.email = email;
+            this.password = password;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            showProgress(true);
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            boolean result=false;
+            try {
+                result = UserUtils.getInstance().signup(email,password);
+            } catch (Exception e) {
+                return false;
+            }
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(final Boolean success) {
+            mSignUpTask = null;
+            showProgress(false);
+
+            if (success) {
+                Intent intent = new Intent(SignupActivity.this,MainActivity.class);
+                startActivity(intent);
+            } else {
+                mPassword.setError(getString(R.string.error_invalid_password));
+                mPassword.requestFocus();
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+            mSignUpTask = null;
+            showProgress(false);
+        }
     }
 }
