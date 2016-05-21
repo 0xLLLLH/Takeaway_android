@@ -16,6 +16,7 @@
         custom:titleText="登陆"
         custom:titleTextSize="@dimen/topbar_title_text_size"
         custom:titleBackground="@null"
+        custom:showMenu="true"
         custom:menuText="立即注册"
         custom:menuTextSize="@dimen/topbar_menu_text_size"
         custom:menuBackground="@null"

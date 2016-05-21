@@ -7,11 +7,16 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * Created by mephist0 on 16-5-16.
+ * Created by 0xLLLLH on 16-5-16.
+ *
  */
 public class SampleFragmentPagerAdapter extends FragmentPagerAdapter{
     final int PAGE_COUNT = 3;
@@ -19,6 +24,7 @@ public class SampleFragmentPagerAdapter extends FragmentPagerAdapter{
     private int imageDefaultId[] = new int[]{R.mipmap.tab_home,R.mipmap.tab_order,R.mipmap.tab_my};
     private int imageActiveId[] = new int[]{R.mipmap.tab_home_active,R.mipmap.tab_order_active,R.mipmap.tab_my_active};
     private Context context;
+    private int mChildCount;
 
     public SampleFragmentPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
@@ -36,13 +42,17 @@ public class SampleFragmentPagerAdapter extends FragmentPagerAdapter{
 
     @Override
     public Fragment getItem(int position) {
-        switch (position){
-            case 0:return HomeFragment.newInstance();
-            case 1:return OrderListFragment.newInstance();
-            case 2:return UsercenterFragment.newInstance();
+        switch (position) {
+            case 0:
+                return HomeFragment.newInstance();
+            case 1:
+                return OrderListFragment.newInstance();
+            case 2:
+                return UsercenterFragment.newInstance();
+            default:
+                Log.d("FragmentPagerAdapter", "Can't find corresponding fragment at position " + position);
+                return new TabFragment();
         }
-        Log.d("FragmentPagerAdapter","Can't find corresponding fragment");
-        return null;
     }
 
     @Override
@@ -53,5 +63,21 @@ public class SampleFragmentPagerAdapter extends FragmentPagerAdapter{
     @Override
     public CharSequence getPageTitle(int position) {
         return tabTitles[position];
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+        mChildCount = getCount();
+        super.notifyDataSetChanged();
+    }
+
+    @Override
+    public int getItemPosition(Object object) {
+        // 重写getItemPosition,保证每次获取时都强制重绘UI
+        if (mChildCount > 0) {
+            mChildCount--;
+            return POSITION_NONE;
+        }
+        return super.getItemPosition(object);
     }
 }

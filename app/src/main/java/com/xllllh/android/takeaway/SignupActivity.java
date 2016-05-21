@@ -1,8 +1,10 @@
 package com.xllllh.android.takeaway;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,12 +21,12 @@ public class SignupActivity extends Activity {
     EditText mUsername, mPassword,mConfirm;
     Button mSignUp;
     private ProgressDialog dialog;
-    private static int minimumPasswordLength =6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+        Utils.setStatusBarColor(SignupActivity.this, Color.rgb(0,0,0),true);
 
         mTopBar = (TopBar) findViewById(R.id.topbar);
         mTopBar.setOnTopbarClickListener(new TopBar.topbarClickListener() {
@@ -38,7 +40,7 @@ public class SignupActivity extends Activity {
                 //Toast.makeText(SignupActivity.this,"You clicked the menu button",Toast.LENGTH_SHORT).show();
             }
         });
-        mTopBar.setMenuButtonVisible(false);
+        //mTopBar.setMenuButtonVisible(false);
 
         mUsername = (EditText) findViewById(R.id.username);
         Drawable ic_user = getResources().getDrawable(R.mipmap.ic_user,null);
@@ -94,7 +96,7 @@ public class SignupActivity extends Activity {
             focusView=mUsername;
             cancel=true;
         }
-        else if (!isAccountValid(account))
+        else if (!UserUtils.isUsernameValid(account))
         {
             mUsername.setError(getString(R.string.error_invalid_account));
             focusView=mUsername;
@@ -108,7 +110,7 @@ public class SignupActivity extends Activity {
             focusView=mPassword;
             cancel=true;
         }
-        else if (!isPasswordValid(password)){
+        else if (!UserUtils.isPasswordValid(password)){
             mPassword.setError(getString(R.string.error_invalid_password));
             focusView=mPassword;
             cancel=true;
@@ -156,16 +158,6 @@ public class SignupActivity extends Activity {
             dialog.hide();
         }
     }
-    private boolean isAccountValid(String account){
-        if (Character.isDigit(account.charAt(0))||account.length()< minimumPasswordLength)
-            return false;
-        return true;
-    }
-    private boolean isPasswordValid(String password) {
-        if (TextUtils.isEmpty(password)||password.length()< minimumPasswordLength)
-            return false;
-        return true;
-    }
     /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
@@ -190,7 +182,7 @@ public class SignupActivity extends Activity {
         protected Boolean doInBackground(Void... params) {
             boolean result=false;
             try {
-                result = UserUtils.getInstance().signup(email,password);
+                result = UserUtils.signup(email,password);
             } catch (Exception e) {
                 return false;
             }
@@ -206,8 +198,11 @@ public class SignupActivity extends Activity {
                 Intent intent = new Intent(SignupActivity.this,MainActivity.class);
                 startActivity(intent);
             } else {
-                mPassword.setError(getString(R.string.error_invalid_password));
-                mPassword.requestFocus();
+                AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
+                builder.setMessage(getString(R.string.error_username_occupied));
+                builder.setPositiveButton("确定",null);
+                builder.show();
+                mUsername.requestFocus();
             }
         }
 

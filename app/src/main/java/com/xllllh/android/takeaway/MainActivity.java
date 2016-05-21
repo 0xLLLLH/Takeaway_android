@@ -2,13 +2,18 @@ package com.xllllh.android.takeaway;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,11 +28,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Log.d("debug","status:"+UserUtils.isLogined());
+
+        initComponents();
+    }
+
+    void initComponents(){
         viewPager = (ViewPager)findViewById(R.id.viewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
 
         SampleFragmentPagerAdapter pagerAdapter =
                 new SampleFragmentPagerAdapter(getSupportFragmentManager(), this);
+
         viewPager.setAdapter(pagerAdapter);
 
         tabLayout.setupWithViewPager(viewPager);

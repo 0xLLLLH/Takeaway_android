@@ -14,7 +14,7 @@ import android.view.ViewGroup;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends TabFragment {
 
     public HomeFragment() {
         // Required empty public constructor
@@ -45,5 +45,10 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
+    }
+
+    @Override
+    public void refresh() {
+        super.refresh();
     }
 }

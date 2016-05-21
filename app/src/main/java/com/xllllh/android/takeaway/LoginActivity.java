@@ -1,6 +1,7 @@
 package com.xllllh.android.takeaway;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -25,7 +26,6 @@ public class LoginActivity extends Activity {
     EditText mUsername, mPassword;
     Button mLogin;
     private ProgressDialog dialog;
-    private static int minimumPasswordLength =6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +96,7 @@ public class LoginActivity extends Activity {
             focusView=mUsername;
             cancel=true;
         }
-        else if (!isAccountValid(account))
+        else if (!UserUtils.isUsernameValid(account))
         {
             mUsername.setError(getString(R.string.error_invalid_account));
             focusView=mUsername;
@@ -109,7 +109,7 @@ public class LoginActivity extends Activity {
             focusView=mPassword;
             cancel=true;
         }
-        else if (!isPasswordValid(password)){
+        else if (!UserUtils.isPasswordValid(password)){
             mPassword.setError(getString(R.string.error_invalid_password));
             focusView=mPassword;
             cancel=true;
@@ -120,9 +120,7 @@ public class LoginActivity extends Activity {
         }
         else {
             //start login progress
-            //TODO:start login thread here, AsyncTask is advisable.
             Log.d("LoginActivity", "Start login");
-
             mAuthTask = new UserLoginTask(account,password);
             mAuthTask.execute();
         }
@@ -146,16 +144,7 @@ public class LoginActivity extends Activity {
             dialog.hide();
         }
     }
-    private boolean isAccountValid(String account){
-        if (Character.isDigit(account.charAt(0))||account.length()< minimumPasswordLength)
-            return false;
-        return true;
-    }
-    private boolean isPasswordValid(String password) {
-        if (TextUtils.isEmpty(password)||password.length()< minimumPasswordLength)
-            return false;
-        return true;
-    }
+
     /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
@@ -180,7 +169,7 @@ public class LoginActivity extends Activity {
         protected Boolean doInBackground(Void... params) {
             boolean result=false;
             try {
-                result = UserUtils.getInstance().login(email,password);
+                result = UserUtils.login(email,password);
             } catch (Exception e) {
                 return false;
             }
@@ -197,7 +186,11 @@ public class LoginActivity extends Activity {
                 startActivity(intent);
                 Toast.makeText(LoginActivity.this,"登陆成功",Toast.LENGTH_SHORT).show();
             } else {
-                mPassword.setError(getString(R.string.error_invalid_password));
+                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                builder.setMessage(getString(R.string.error_wrong_username_or_password));
+                builder.setPositiveButton("确定",null);
+                builder.show();
+                //mPassword.setError(getString(R.string.error_wrong_username_or_password));
                 mPassword.requestFocus();
             }
         }

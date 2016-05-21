@@ -1,8 +1,9 @@
 package com.xllllh.android.takeaway;
 
 
-import android.app.Application;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 import android.util.Log;
 import org.json.JSONObject;
 
@@ -12,28 +13,26 @@ import org.json.JSONObject;
  * This file contains account relate methods, such as login, logout and register.
  * If user had login, variety isLogin would set to true, and information of user would be saved in shared preference.
  */
-public class UserUtils extends Application{
+public class UserUtils{
 
-    public String mUsername = null;
-    private static UserUtils instance;
+    private static String apiURL = "http://dirtytao.com/androidAPI/user";
+    public static String mUsername = null;
+    private static Context context;
 
-    public static UserUtils getInstance() {
-        return instance;
-    }
+    public static int minimumUsernameLength = 6;
+    public static int minimumPasswordLength = 6;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        instance = this;
+    public static void init(Context context) {
+        UserUtils.context = context;
         mUsername = getUsername();
     }
 
-    public boolean isLogin() {
+    public static boolean isLogined() {
         return mUsername!=null;
     }
 
-    public boolean login(String username, String password){
-        JSONObject jsonResponse = Utils.connectAndGetJSONObject("http://dirtytao.com/demo/index.php/Home/User",
+    public static boolean login(String username, String password){
+        JSONObject jsonResponse = Utils.connectAndGetJSONObject(apiURL,
                 "POST",String.format("op=signin&username=%s&password=%s",username,password));
         try {
             String status = jsonResponse.getString("status");
@@ -48,17 +47,17 @@ public class UserUtils extends Application{
         return false;
     }
 
-    public boolean logout(String username){
+    public static boolean logout(){
         setUsername("");
         return true;
     }
 
-    public boolean signup(String username, String password){
-        JSONObject jsonResponse = Utils.connectAndGetJSONObject("http://dirtytao.com/demo/index.php/Home/User",
+    public static boolean signup(String username, String password){
+        JSONObject jsonResponse = Utils.connectAndGetJSONObject(apiURL,
                 "POST",String.format("op=signup&username=%s&password=%s",username,password));
         try {
             String status = jsonResponse.getString("status");
-            Log.d("UserUtils_login",status);
+            Log.d("UserUtils_signup",status);
             return status.equals("success");
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,16 +65,30 @@ public class UserUtils extends Application{
         return false;
     }
 
-    private void setUsername(String username) {
-        SharedPreferences.Editor editor = getSharedPreferences("AccountInfo", MODE_PRIVATE).edit();
+    private static void setUsername(String username) {
+        SharedPreferences.Editor editor = context.getSharedPreferences("AccountInfo", Context.MODE_PRIVATE).edit();
         editor.clear();
-        if (!username.equals(""))
-            editor.putString("username",username);
-        editor.apply();
+        mUsername = null;
+        if (!username.equals("")) {
+            mUsername = username;
+            editor.putString("username", username);
+        }
+        editor.commit();
     }
 
-    private String getUsername() {
-        SharedPreferences preferences = getSharedPreferences("AccountInfo", MODE_PRIVATE);
+    private static String getUsername() {
+        SharedPreferences preferences = context.getSharedPreferences("AccountInfo", Context.MODE_PRIVATE);
         return preferences.getString("username",null);
+    }
+
+    public static boolean isUsernameValid(String username){
+        if (Character.isDigit(username.charAt(0))||username.length()< UserUtils.minimumUsernameLength)
+            return false;
+        return true;
+    }
+    public static boolean isPasswordValid(String password) {
+        if (TextUtils.isEmpty(password)||password.length()< UserUtils.minimumPasswordLength)
+            return false;
+        return true;
     }
 }

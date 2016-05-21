@@ -16,9 +16,10 @@ import android.widget.LinearLayout;
  * Use the {@link UsercenterFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class UsercenterFragment extends Fragment {
+public class UsercenterFragment extends TabFragment {
 
-    LinearLayout headerNotLogin;
+    private LinearLayout headerNotLogin;
+    private LinearLayout headerLogin;
 
     public UsercenterFragment() {
         // Required empty public constructor
@@ -45,14 +46,56 @@ public class UsercenterFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_usercenter, container, false);
-        headerNotLogin = (LinearLayout)view.findViewById(R.id.header_not_login);
+
+        headerNotLogin = (LinearLayout) view.findViewById(R.id.header_not_login);
+        headerLogin = (LinearLayout) view.findViewById(R.id.header_login);
+
+        if (UserUtils.isLogined()) {
+            headerNotLogin.setVisibility(View.GONE);
+            headerLogin.setVisibility(View.VISIBLE);
+        } else {
+            headerNotLogin.setVisibility(View.VISIBLE);
+            headerLogin.setVisibility(View.GONE);
+        }
+
+        bindHeaderLogin();
+        bindHeaderNotLogin();
+        bindMenu();
+
+        return view;
+    }
+
+    private void bindHeaderNotLogin(){
         headerNotLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),LoginActivity.class);
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
             }
         });
-        return view;
+    }
+    private void bindHeaderLogin(){
+        View avatar_block = headerLogin.findViewById(R.id.avatar_block);
+        avatar_block.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+    private void bindMenu(){
+
+    }
+
+    @Override
+    public void refresh() {
+        if (UserUtils.isLogined()) {
+            headerNotLogin.setVisibility(View.GONE);
+            headerLogin.setVisibility(View.VISIBLE);
+        } else {
+            headerNotLogin.setVisibility(View.VISIBLE);
+            headerLogin.setVisibility(View.GONE);
+        }
     }
 }
