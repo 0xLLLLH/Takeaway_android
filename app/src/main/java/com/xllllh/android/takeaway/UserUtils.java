@@ -15,7 +15,8 @@ import org.json.JSONObject;
  */
 public class UserUtils{
 
-    private static String apiURL = "http://dirtytao.com/androidAPI/user";
+    private static String apiURL_signup = "http://dirtytao.com/androidAPI/user/signup";
+    private static String apiURL_signin = "http://dirtytao.com/androidAPI/user/signin";
     public static String mUsername = null;
     private static Context context;
 
@@ -32,7 +33,7 @@ public class UserUtils{
     }
 
     public static boolean login(String username, String password){
-        JSONObject jsonResponse = Utils.connectAndGetJSONObject(apiURL,
+        JSONObject jsonResponse = Utils.connectAndGetJSONObject(apiURL_signin,
                 "POST",String.format("op=signin&username=%s&password=%s",username,password));
         try {
             String status = jsonResponse.getString("status");
@@ -53,7 +54,7 @@ public class UserUtils{
     }
 
     public static boolean signup(String username, String password){
-        JSONObject jsonResponse = Utils.connectAndGetJSONObject(apiURL,
+        JSONObject jsonResponse = Utils.connectAndGetJSONObject(apiURL_signup,
                 "POST",String.format("op=signup&username=%s&password=%s",username,password));
         try {
             String status = jsonResponse.getString("status");
