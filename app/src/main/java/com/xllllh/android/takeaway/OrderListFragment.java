@@ -17,7 +17,7 @@ import android.widget.Toast;
  * Use the {@link OrderListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class OrderListFragment extends TabFragment {
+public class OrderListFragment extends Fragment {
 
     Button login;
 
@@ -61,10 +61,5 @@ public class OrderListFragment extends TabFragment {
             }
         });
         return view;
-    }
-
-    @Override
-    public void refresh() {
-        super.refresh();
     }
 }

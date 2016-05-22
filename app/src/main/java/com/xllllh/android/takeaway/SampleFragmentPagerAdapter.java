@@ -51,7 +51,7 @@ public class SampleFragmentPagerAdapter extends FragmentPagerAdapter{
                 return UsercenterFragment.newInstance();
             default:
                 Log.d("FragmentPagerAdapter", "Can't find corresponding fragment at position " + position);
-                return new TabFragment();
+                return new Fragment();
         }
     }
 

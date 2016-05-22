@@ -16,8 +16,14 @@ public class Config extends Application {
         super.onCreate();
         instance = this;
 
-        //init util classes need context
-        UserUtils.init(getApplicationContext());
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //init util classes need context
+                UserUtils.init(getApplicationContext());
+                ShopUtils.ShopList.init();
+            }
+        }).start();
     }
 
     public static Config getInstance() {

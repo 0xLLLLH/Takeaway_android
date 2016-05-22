@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
  * Use the {@link UsercenterFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class UsercenterFragment extends TabFragment {
+public class UsercenterFragment extends Fragment {
 
     private LinearLayout headerNotLogin;
     private LinearLayout headerLogin;
@@ -86,16 +86,5 @@ public class UsercenterFragment extends TabFragment {
     }
     private void bindMenu(){
 
-    }
-
-    @Override
-    public void refresh() {
-        if (UserUtils.isLogined()) {
-            headerNotLogin.setVisibility(View.GONE);
-            headerLogin.setVisibility(View.VISIBLE);
-        } else {
-            headerNotLogin.setVisibility(View.VISIBLE);
-            headerLogin.setVisibility(View.GONE);
-        }
     }
 }

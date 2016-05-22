@@ -24,6 +24,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by 0xLLLLH on 16-5-19.
@@ -111,6 +113,51 @@ public class Utils {
                 connection.disconnect();
         }
         return jsonObject;
+    }
+    public static List<JSONObject> connectAndGetJSONList(String urlString, String method, String params) {
+        List<JSONObject> jsonList=new ArrayList<JSONObject>();
+        HttpURLConnection connection = null;
+        try {
+            URL url = new URL(urlString);
+            connection = (HttpURLConnection)url.openConnection();
+            connection.setRequestMethod(method);
+            connection.setConnectTimeout(8000);
+            connection.setReadTimeout(8000);
+
+            if (method.equals("POST")) {
+                //Post data
+                connection.setDoOutput(true);
+                PrintWriter pw = new PrintWriter(connection.getOutputStream());
+                pw.print(params);
+                pw.flush();
+                pw.close();
+            }
+
+            InputStream in = connection.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = reader.readLine())!=null) {
+                response.append(line);
+            }
+            String jsonString = response.toString();
+            Log.d("Utils",jsonString);
+            //Parse JSON
+            try {
+                JSONArray jsonArray = new JSONArray(jsonString);
+                for (int i=0;i<jsonArray.length();i++) {
+                    jsonList.add(jsonArray.getJSONObject(i));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null)
+                connection.disconnect();
+        }
+        return jsonList;
     }
     /*
      * 从网络上获取图片，如果图片在本地存在的话就直接拿，如果不存在再去服务器上下载图片
