@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import org.json.JSONObject;
@@ -53,12 +54,26 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
         position--;
         if (mIsStagger) {
             StaggerViewHolder staggerViewHolder = (StaggerViewHolder) holder;
-            staggerViewHolder.iconView.setVisibility(View.VISIBLE);
-            staggerViewHolder.mContentView.setText(mValues.get(position).toString());
         } else {
             ViewHolder mHolder = (ViewHolder) holder;
             mHolder.mItem = mValues.get(position);
-            mHolder.mContentView.setText(mValues.get(position).toString());
+            try {
+                mHolder.mShopName.setText(mHolder.mItem.getString("shop_name"));
+                mHolder.mShopRating.setRating((float) mHolder.mItem.getDouble("score"));
+                mHolder.mShopSold.setText(String.format("月售%s单", mHolder.mItem.getString("sell_num")));
+                int sendTime = mHolder.mItem.getInt("ave_sendtime");
+                StringBuilder builder = new StringBuilder();
+                if (sendTime/60 > 0)
+                    builder.append(String.format("%d小时",sendTime/60));
+                builder.append(String.format("%d分钟",sendTime%60));
+                mHolder.mShopSendTime.setText(builder.toString());
+                mHolder.mShopPriceToSend.setText(String.format("起送价￥%d", mHolder.mItem.getInt("price_tosend")));
+                mHolder.mShopSendFee.setText(String.format("配送费￥0"));
+                String []discount = mHolder.mItem.getString("shop_name").split("-");
+                mHolder.mShopDiscount.setText(String.format("满%s减%s",discount[0],discount[1]));
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -69,31 +84,34 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     public class StaggerViewHolder extends RecyclerView.ViewHolder {
         public View mView;
-        public View iconView;
-        public TextView mContentView;
 
         public StaggerViewHolder(View itemView) {
             super(itemView);
             mView = itemView;
-            iconView = itemView.findViewById(R.id.icon);
-            mContentView = (TextView) itemView.findViewById(R.id.content);
         }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mContentView;
+        public final TextView mShopName,mShopSold,mShopSendTime,mShopPriceToSend,mShopSendFee,mShopDiscount;
+        public final RatingBar mShopRating;
         public JSONObject mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mShopName = (TextView) view.findViewById(R.id.shop_name);
+            mShopRating = (RatingBar) view.findViewById(R.id.shop_rating);
+            mShopSold = (TextView) view.findViewById(R.id.shop_sold);
+            mShopSendTime = (TextView) view.findViewById(R.id.shop_send_time);
+            mShopPriceToSend = (TextView) view.findViewById(R.id.shop_price_to_send);
+            mShopSendFee = (TextView) view.findViewById(R.id.shop_send_fee);
+            mShopDiscount = (TextView) view.findViewById(R.id.shop_discount);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + mItem.toString() + "'";
         }
     }
 }

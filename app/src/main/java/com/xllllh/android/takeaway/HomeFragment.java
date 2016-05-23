@@ -83,7 +83,7 @@ public class HomeFragment extends Fragment {
                         LoadMoreTask loadMoreTask = new LoadMoreTask();
                         loadMoreTask.execute();
                     }
-                },1000);
+                },100);
             }
         });
         return view;

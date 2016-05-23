@@ -92,12 +92,13 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center"
-                android:src="@mipmap/r0"
+                android:src="@mipmap/r1"
                 android:scaleType="centerCrop"
                 android:background="@mipmap/r2"
                 android:layout_margin="10dp"
                 android:padding="8dp"/>
             <TextView
+                android:id="@+id/username_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 
 /**
@@ -83,6 +84,8 @@ public class UsercenterFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        TextView username_view = (TextView) avatar_block.findViewById(R.id.username_view);
+        username_view.setText(UserUtils.mUsername);
     }
     private void bindMenu(){
 
