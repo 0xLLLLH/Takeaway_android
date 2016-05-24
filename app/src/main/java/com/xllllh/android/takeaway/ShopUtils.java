@@ -14,10 +14,13 @@ public class ShopUtils {
         static int page =0;
         static int pageSize = 5;
         static List<JSONObject> initialContents = new ArrayList<>();
+        static boolean mHasMore;
 
         public static void init() {
             page = 0;
-            initialContents = getShops();
+            mHasMore = hasMore();
+            if (mHasMore)
+                initialContents .addAll( getShops());
         }
 
         public static void setPage(int p) {

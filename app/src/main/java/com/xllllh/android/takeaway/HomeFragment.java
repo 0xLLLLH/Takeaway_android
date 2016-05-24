@@ -86,6 +86,8 @@ public class HomeFragment extends Fragment {
                 },100);
             }
         });
+
+        loadMoreRecyclerView.notifyMoreFinish(ShopUtils.ShopList.mHasMore);
         return view;
     }
     /**

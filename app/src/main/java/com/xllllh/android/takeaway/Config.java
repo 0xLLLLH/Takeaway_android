@@ -19,7 +19,7 @@ public class Config extends Application {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                //init util classes need context
+                //init util classes
                 UserUtils.init(getApplicationContext());
                 ShopUtils.ShopList.init();
             }
