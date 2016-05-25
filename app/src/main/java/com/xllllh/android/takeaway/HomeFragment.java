@@ -11,6 +11,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,7 +60,7 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
@@ -68,6 +69,15 @@ public class HomeFragment extends Fragment {
 
         loadMoreRecyclerView = (LoadMoreRecyclerView)view.findViewById(R.id.recycler_view);
         myItemRecyclerViewAdapter = new ItemRecyclerViewAdapter(ShopUtils.ShopList.initialContents);
+        myItemRecyclerViewAdapter.setOnItemClickListener(new ItemRecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void click(JSONObject obj) {
+                Log.d("debug","item onclick");
+                Intent intent = new Intent(getActivity(),ShopActivity.class);
+                intent.putExtra("json",obj.toString());
+                startActivity(intent);
+            }
+        });
         loadMoreRecyclerView.setAdapter(myItemRecyclerViewAdapter);
         loadMoreRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         loadMoreRecyclerView.setAutoLoadMoreEnable(true);
@@ -76,7 +86,6 @@ public class HomeFragment extends Fragment {
         loadMoreRecyclerView.setLoadMoreListener(new LoadMoreRecyclerView.LoadMoreListener() {
             @Override
             public void onLoadMore() {
-
                 loadMoreRecyclerView.postDelayed(new Runnable() {
                     @Override
                     public void run() {
