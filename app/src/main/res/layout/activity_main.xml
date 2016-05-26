@@ -15,7 +15,10 @@
             android:layout_height="0dp"
             android:layout_weight="1.0"
             android:scrollbars="none" />
-
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorGrey"/>
         <android.support.design.widget.TabLayout
             android:id="@+id/tabLayout"
             style="@style/MyCustomTabLayout"

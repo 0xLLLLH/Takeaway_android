@@ -17,10 +17,15 @@ import java.util.List;
  * Created by 0xLLLLH on 16-5-22.
  *
  */
-public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+implements View.OnClickListener{
     private List<JSONObject> mValues = new ArrayList<>();
     private boolean mIsStagger;
-    private OnItemClickListener onItemClickListener;
+    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
+
+    public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
+        this.mOnItemClickListener = listener;
+    }
 
     public ItemRecyclerViewAdapter(List<JSONObject> items) {
         mValues = items;
@@ -47,7 +52,8 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
         } else {
             View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.shop_list_item, parent, false);
-            return new ViewHolder(view,onItemClickListener);
+            view.setOnClickListener(this);
+            return new ViewHolder(view);
         }
     }
 
@@ -59,6 +65,7 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
         } else {
             ViewHolder mHolder = (ViewHolder) holder;
             mHolder.mItem = mValues.get(position);
+            mHolder.mView.setTag(mHolder.mItem);
             try {
                 mHolder.mShopName.setText(mHolder.mItem.getString("shop_name"));
                 mHolder.mShopRating.setRating((float) mHolder.mItem.getDouble("score"));
@@ -88,13 +95,12 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
         return mValues.size();
     }
 
-    public OnItemClickListener getOnItemClickListener() {
-        return onItemClickListener;
-    }
-
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        Log.d("debug","set listener");
-        this.onItemClickListener = onItemClickListener;
+    @Override
+    public void onClick(View v) {
+        if (mOnItemClickListener != null) {
+            //注意这里使用getTag方法获取数据
+            mOnItemClickListener.onItemClick(v,(JSONObject) v.getTag());
+        }
     }
 
     public class StaggerViewHolder extends RecyclerView.ViewHolder {
@@ -106,14 +112,13 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mShopName,mShopSold,mShopSendTime,mShopPriceToSend,mShopSendFee,mShopDiscount;
         public final RatingBar mShopRating;
         public JSONObject mItem;
-        private OnItemClickListener itemClickListener;
 
-        public ViewHolder(View view,OnItemClickListener clickListener) {
+        public ViewHolder(View view) {
             super(view);
             mView = view;
             mShopName = (TextView) view.findViewById(R.id.shop_name);
@@ -123,23 +128,17 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
             mShopPriceToSend = (TextView) view.findViewById(R.id.shop_price_to_send);
             mShopSendFee = (TextView) view.findViewById(R.id.shop_send_fee);
             mShopDiscount = (TextView) view.findViewById(R.id.shop_discount);
-            itemClickListener = clickListener;
         }
 
         @Override
         public String toString() {
             return super.toString() + " '" + mItem.toString() + "'";
         }
-
-        @Override
-        public void onClick(View v) {
-            Log.d("debug","onClick");
-            if (itemClickListener!=null)
-                itemClickListener.click(this.mItem);
-        }
     }
 
-    public interface OnItemClickListener{
-        void click(JSONObject obj);
+    public static interface OnRecyclerViewItemClickListener {
+        void onItemClick(View view , JSONObject data);
     }
+
+
 }

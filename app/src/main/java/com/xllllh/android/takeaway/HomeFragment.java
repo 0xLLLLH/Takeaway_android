@@ -68,20 +68,14 @@ public class HomeFragment extends Fragment {
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_widget);
 
         loadMoreRecyclerView = (LoadMoreRecyclerView)view.findViewById(R.id.recycler_view);
+
         myItemRecyclerViewAdapter = new ItemRecyclerViewAdapter(ShopUtils.ShopList.initialContents);
-        myItemRecyclerViewAdapter.setOnItemClickListener(new ItemRecyclerViewAdapter.OnItemClickListener() {
-            @Override
-            public void click(JSONObject obj) {
-                Log.d("debug","item onclick");
-                Intent intent = new Intent(getActivity(),ShopActivity.class);
-                intent.putExtra("json",obj.toString());
-                startActivity(intent);
-            }
-        });
+
         loadMoreRecyclerView.setAdapter(myItemRecyclerViewAdapter);
         loadMoreRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         loadMoreRecyclerView.setAutoLoadMoreEnable(true);
         loadMoreRecyclerView.setHeaderEnable(true);
+        loadMoreRecyclerView.setHasFixedSize(true);
         loadMoreRecyclerView.addHeaderView(R.layout.homepage_entries);
         loadMoreRecyclerView.setLoadMoreListener(new LoadMoreRecyclerView.LoadMoreListener() {
             @Override
@@ -95,7 +89,15 @@ public class HomeFragment extends Fragment {
                 },100);
             }
         });
-
+        myItemRecyclerViewAdapter.setOnItemClickListener(new ItemRecyclerViewAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, JSONObject data) {
+                Toast.makeText(getActivity(),"click",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(),ShopActivity.class);
+                intent.putExtra("json",data.toString());
+                startActivity(intent);
+            }
+        });
         loadMoreRecyclerView.notifyMoreFinish(ShopUtils.ShopList.mHasMore);
         return view;
     }
