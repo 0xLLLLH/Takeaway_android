@@ -5,24 +5,22 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
     android:elevation="1dp">
-    <GridLayout
-        android:rowCount="2"
-        android:columnCount="4"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
         android:elevation="1dp">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_row="0"
-            android:layout_column="0"
+            android:layout_weight="1"
             android:orientation="vertical">
             <ImageView
                 android:layout_gravity="center"
                 android:layout_width="85dp"
                 android:layout_height="50dp"
-                android:src="@mipmap/vf"
+                android:src="@mipmap/vk"
                 android:contentDescription="美食"/>
             <TextView
                 android:gravity="center"
@@ -31,131 +29,130 @@
                 android:text="美食"/>
         </LinearLayout>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_row="0"
-            android:layout_column="1"
+            android:layout_weight="1"
             android:orientation="vertical">
             <ImageView
                 android:layout_gravity="center"
                 android:layout_width="85dp"
                 android:layout_height="50dp"
-                android:src="@mipmap/vf"
-                android:contentDescription="美食"/>
+                android:src="@mipmap/vl"
+                android:contentDescription="超市"/>
             <TextView
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="美食"/>
+                android:text="超市"/>
         </LinearLayout>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_row="0"
-            android:layout_column="2"
+            android:layout_weight="1"
             android:orientation="vertical">
             <ImageView
                 android:layout_gravity="center"
                 android:layout_width="85dp"
                 android:layout_height="50dp"
-                android:src="@mipmap/vf"
-                android:contentDescription="美食"/>
+                android:src="@mipmap/vh"
+                android:contentDescription="鲜果购"/>
             <TextView
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="美食"/>
+                android:text="鲜果购"/>
         </LinearLayout>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_row="0"
-            android:layout_column="3"
+            android:layout_weight="1"
             android:orientation="vertical">
             <ImageView
                 android:layout_gravity="center"
                 android:layout_width="85dp"
                 android:layout_height="50dp"
                 android:src="@mipmap/vf"
-                android:contentDescription="美食"/>
+                android:contentDescription="甜点饮品"/>
             <TextView
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="美食"/>
+                android:text="甜点饮品"/>
         </LinearLayout>
-
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:elevation="1dp">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_row="1"
-            android:layout_column="0"
+            android:layout_weight="1"
             android:orientation="vertical">
             <ImageView
                 android:layout_gravity="center"
                 android:layout_width="85dp"
                 android:layout_height="50dp"
-                android:src="@mipmap/vf"
-                android:contentDescription="美食"/>
+                android:src="@mipmap/ve"
+                android:contentDescription="土豪馆"/>
             <TextView
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="美食"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_row="1"
-            android:layout_column="1"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_gravity="center"
-                android:layout_width="85dp"
-                android:layout_height="50dp"
-                android:src="@mipmap/vf"
-                android:contentDescription="美食"/>
-            <TextView
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="美食"/>
+                android:text="土豪馆"/>
         </LinearLayout>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_row="1"
-            android:layout_column="2"
+            android:layout_weight="1"
             android:orientation="vertical">
             <ImageView
                 android:layout_gravity="center"
                 android:layout_width="85dp"
                 android:layout_height="50dp"
-                android:src="@mipmap/vf"
-                android:contentDescription="美食"/>
+                android:src="@mipmap/vj"
+                android:contentDescription="专送"/>
             <TextView
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="美食"/>
+                android:text="专送"/>
         </LinearLayout>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_row="1"
-            android:layout_column="3"
+            android:layout_weight="1"
             android:orientation="vertical">
             <ImageView
                 android:layout_gravity="center"
                 android:layout_width="85dp"
                 android:layout_height="50dp"
-                android:src="@mipmap/vf"
-                android:contentDescription="美食"/>
+                android:src="@mipmap/vg"
+                android:contentDescription="鲜花蛋糕"/>
             <TextView
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="美食"/>
+                android:text="鲜花蛋糕"/>
         </LinearLayout>
-    </GridLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="85dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/vi"
+                android:contentDescription="送药上门"/>
+            <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="送药上门"/>
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
