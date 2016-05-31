@@ -201,4 +201,21 @@ public class Utils {
         return new String(m);
     }
 
+    /**
+     * This method get value of corresponding key in JSON object and return as String.
+     * @param jsonObject
+     * @param key
+     * @param defaultValue
+     * @return value of corresponding key,can be a json string
+     */
+    public static String getValueFromJSONObject(JSONObject jsonObject,String key,String defaultValue) {
+        String ret = defaultValue;
+        try {
+            ret = jsonObject.get(key).toString();
+        }catch (Exception e) {
+            Log.d("Utils",String.format("Unable to get %s from JSON object",key));
+            e.printStackTrace();
+        }
+        return ret;
+    }
 }

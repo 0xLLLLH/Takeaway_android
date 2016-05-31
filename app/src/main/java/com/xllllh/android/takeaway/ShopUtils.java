@@ -1,8 +1,10 @@
 package com.xllllh.android.takeaway;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -47,6 +49,37 @@ public class ShopUtils {
                 e.printStackTrace();
             }
             return ret;
+        }
+    }
+
+    public static class Shop {
+
+        public static JSONObject getShopDetail(String shop_id){
+            JSONObject detail = null;
+            detail = Utils.connectAndGetJSONObject("http://dirtytao.com/androidAPI/Store/storedetail",
+                    "POST",String.format("sid=%s",shop_id));
+            return detail;
+        }
+
+        public static HashMap<String, String> getDishTypeList(JSONArray jsonArray) {
+            HashMap<String, String> type_list = new HashMap<>();
+            for (int i=0; i< jsonArray.length();i++) {
+                JSONObject obj=null;
+                try {
+                    obj = jsonArray.getJSONObject(i);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                type_list.put(Utils.getValueFromJSONObject(obj,"id","0"),Utils.getValueFromJSONObject(obj,"type",""));
+            }
+            return type_list;
+        }
+
+        public static List<JSONObject> getDishList(String shop_id) {
+            List<JSONObject> dishList = new ArrayList<>();
+            dishList = Utils.connectAndGetJSONList("http://dirtytao.com/androidAPI/Store/storedish",
+                    "POST",String.format("sid=%s",shop_id));
+            return dishList;
         }
     }
 }

@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorPrimary">@color/colorTextInPrimaryColor</item>
         <item name="android:textColor">@color/colorTextDefault</item>
+        <item name="stickyListHeadersListViewStyle">@style/StickListView</item>
     </style>
     <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
         <item name="tabMaxWidth">@dimen/tab_max_width</item>
@@ -17,5 +18,9 @@
         <item name="tabPaddingEnd">12dp</item>
         <item name="tabBackground">@color/colorTabBackground</item>
         <item name="tabSelectedTextColor">?android:textColorPrimary</item>
+    </style>
+    <style name="StickListView" parent="@android:style/Widget.ListView">
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp  </item>
     </style>
 </resources>
