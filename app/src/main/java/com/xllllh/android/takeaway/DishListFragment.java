@@ -26,6 +26,8 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 public class DishListFragment extends Fragment {
     private static final String ARG_SHOP_ID = "shopId";
 
+    private StickyListHeadersListView stickyList;
+
     private String shopId;
     public DishListFragment() {
         // Required empty public constructor
@@ -52,14 +54,17 @@ public class DishListFragment extends Fragment {
         if (getArguments() != null) {
             shopId = getArguments().getString(ARG_SHOP_ID);
         }
-
+        LoadShopDetailTask detailTask = new LoadShopDetailTask(shopId);
+        detailTask.execute();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view=inflater.inflate(R.layout.fragment_dish_list, container, false);
+        stickyList = (StickyListHeadersListView) view.findViewById(R.id.dish_list);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dish_list, container, false);
+        return view;
     }
 
     class LoadShopDetailTask extends AsyncTask<Void,Void,Boolean> {
@@ -95,9 +100,8 @@ public class DishListFragment extends Fragment {
         protected void onPostExecute(Boolean aBoolean) {
             super.onPostExecute(aBoolean);
             if (aBoolean) {
-                //stickyList = (StickyListHeadersListView) findViewById(R.id.dish_list);
-                //StickListAdapter adapter = new StickListAdapter(getActivity(), dishList, dishType);
-                //stickyList.setAdapter(adapter);
+                StickListAdapter adapter = new StickListAdapter(getActivity(), dishList, dishType);
+                stickyList.setAdapter(adapter);
             }
         }
     }

@@ -16,7 +16,6 @@ public class ShopActivity extends FragmentActivity {
 
     private LinearLayout shopLoading,shopView;
     private ImageView image_load;
-    private StickyListHeadersListView stickyList;
     private String shopId;
     private JSONObject shopJSON;
     private ProgressDialog dialog;
@@ -48,7 +47,6 @@ public class ShopActivity extends FragmentActivity {
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setCurrentItem(defaultTabIndex);
-        //LoadShopDetailTask detailTask = new LoadShopDetailTask(shopId);
-        //detailTask.execute();
+
     }
 }
