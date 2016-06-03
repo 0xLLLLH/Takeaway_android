@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -18,9 +19,9 @@ public class ShopActivity extends FragmentActivity {
     private ImageView image_load;
     private String shopId;
     private JSONObject shopJSON;
-    private ProgressDialog dialog;
     private ViewPager viewPager;
     private TabLayout tabLayout;
+    private TopBar topBar;
 
     private static int defaultTabIndex = 0;
 
@@ -45,8 +46,29 @@ public class ShopActivity extends FragmentActivity {
         ShopFragmentPagerAdapter adapter = new ShopFragmentPagerAdapter(getSupportFragmentManager(),
                 this,shopId);
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(3);
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setCurrentItem(defaultTabIndex);
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+//        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+//            TabLayout.Tab tab = tabLayout.getTabAt(i);
+//            if (tab != null) {
+//                View view = adapter.getTabView(i);
+//                tab.setCustomView(view);
+//            }
+//        }
 
+        topBar = (TopBar) findViewById(R.id.topbar);
+        topBar.setOnTopbarClickListener(new TopBar.topbarClickListener() {
+            @Override
+            public void titleClick() {
+                finish();
+            }
+
+            @Override
+            public void menuClick() {
+
+            }
+        });
     }
 }

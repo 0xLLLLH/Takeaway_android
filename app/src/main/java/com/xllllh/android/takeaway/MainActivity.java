@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 new SampleFragmentPagerAdapter(getSupportFragmentManager(), this);
 
         viewPager.setAdapter(pagerAdapter);
+        viewPager.setOffscreenPageLimit(3);
 
         tabLayout.setupWithViewPager(viewPager);
 

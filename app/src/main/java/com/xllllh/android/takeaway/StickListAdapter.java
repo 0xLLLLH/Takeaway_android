@@ -53,13 +53,13 @@ public class StickListAdapter extends BaseAdapter implements StickyListHeadersAd
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = inflater.inflate(R.layout.dish_list_item_layout, parent, false);
-            holder.text = (TextView) convertView.findViewById(R.id.dish_list_item);
+            holder.title = (TextView) convertView.findViewById(R.id.dish_title);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.text.setText(dishList.get(position).toString());
+        holder.title.setText(Utils.getValueFromJSONObject(dishList.get(position),"dish_name","dish_name"));
 
         return convertView;
     }
@@ -92,6 +92,6 @@ public class StickListAdapter extends BaseAdapter implements StickyListHeadersAd
     }
 
     private class ViewHolder {
-        TextView text;
+        TextView title;
     }
 }

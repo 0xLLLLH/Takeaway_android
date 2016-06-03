@@ -9,10 +9,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:drawSelectorOnTop="true"
-        android:padding="16dp"
         android:scrollbarStyle="outsideOverlay"
         android:fastScrollEnabled="true"
         android:overScrollMode="never"
+        android:divider="@color/colorGrey"
+        android:dividerHeight="1px"
         style="StickListView">
     </se.emilsjolander.stickylistheaders.StickyListHeadersListView>
 

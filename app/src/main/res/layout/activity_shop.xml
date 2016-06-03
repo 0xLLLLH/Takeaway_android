@@ -98,9 +98,9 @@
         </LinearLayout>
         <android.support.design.widget.TabLayout
             android:id="@+id/shopTab"
-            style="@style/MyCustomTabLayout"
+            style="@style/ShopTabLayout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/tab_height"
+            android:layout_height="30dp"
             android:elevation="1dp"/>
         <android.support.v4.view.ViewPager
             android:id="@+id/shopPager"

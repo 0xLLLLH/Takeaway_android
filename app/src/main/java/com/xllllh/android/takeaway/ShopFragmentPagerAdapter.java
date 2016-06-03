@@ -17,8 +17,6 @@ import android.widget.TextView;
 public class ShopFragmentPagerAdapter extends FragmentPagerAdapter {
     final int PAGE_COUNT = 3;
     private String tabTitles[] = new String[]{"点菜","评价","商家"};
-    private int imageDefaultId[] = new int[]{R.mipmap.tab_home,R.mipmap.tab_order,R.mipmap.tab_my};
-    private int imageActiveId[] = new int[]{R.mipmap.tab_home_active,R.mipmap.tab_order_active,R.mipmap.tab_my_active};
     private Context context;
     private int mChildCount;
     private String shopId;
@@ -27,15 +25,6 @@ public class ShopFragmentPagerAdapter extends FragmentPagerAdapter {
         super(fm);
         this.context = context;
         this.shopId = shopId;
-    }
-
-    public View getTabView(int position) {
-        View v = LayoutInflater.from(context).inflate(R.layout.custom_tab, null);
-        TextView tv = (TextView) v.findViewById(R.id.textView);
-        tv.setText(tabTitles[position]);
-        ImageView img = (ImageView) v.findViewById(R.id.imageView);
-        img.setImageResource(imageDefaultId[position]);
-        return v;
     }
 
     @Override

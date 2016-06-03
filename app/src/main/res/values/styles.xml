@@ -19,8 +19,15 @@
         <item name="tabBackground">@color/colorTabBackground</item>
         <item name="tabSelectedTextColor">?android:textColorPrimary</item>
     </style>
+    <style name="ShopTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabMaxWidth">@dimen/tab_max_width</item>
+        <item name="tabIndicatorColor">@color/colorAccent</item>
+        <item name="tabIndicatorHeight">0dp</item>
+        <item name="tabBackground">@color/colorTabBackground</item>
+        <item name="tabSelectedTextColor">?android:textColorPrimary</item>
+    </style>
     <style name="StickListView" parent="@android:style/Widget.ListView">
-        <item name="android:paddingLeft">10dp</item>
-        <item name="android:paddingRight">10dp  </item>
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">0dp  </item>
     </style>
 </resources>
