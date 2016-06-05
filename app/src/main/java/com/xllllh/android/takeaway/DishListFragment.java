@@ -7,8 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -62,6 +65,7 @@ public class DishListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_dish_list, container, false);
+        view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         stickyList = (StickyListHeadersListView) view.findViewById(R.id.dish_list);
         // Inflate the layout for this fragment
         return view;
@@ -100,8 +104,34 @@ public class DishListFragment extends Fragment {
         protected void onPostExecute(Boolean aBoolean) {
             super.onPostExecute(aBoolean);
             if (aBoolean) {
-                StickListAdapter adapter = new StickListAdapter(getActivity(), dishList, dishType);
+                final StickListAdapter adapter = new StickListAdapter(getActivity(), dishList, dishType);
                 stickyList.setAdapter(adapter);
+                adapter.setButtonOnClickListener(new StickListAdapter.ButtonOnClickListener() {
+
+                    @Override
+                    public void plus(StickListAdapter.ViewHolder holder, JSONObject dish) {
+                        holder.minus.setVisibility(View.VISIBLE);
+                        Integer numInt = Integer.parseInt(holder.num.getText().toString());
+                        numInt++;
+                        holder.num.setText(numInt.toString());
+                        holder.num.setVisibility(View.VISIBLE);
+                    }
+
+                    @Override
+                    public void minus(StickListAdapter.ViewHolder holder, JSONObject dish) {
+                        Integer numInt = Integer.parseInt(holder.num.getText().toString());
+                        if (numInt>0)
+                        {
+                            numInt--;
+                            holder.num.setText(numInt.toString());
+                            if (numInt==0)
+                            {
+                                holder.minus.setVisibility(View.INVISIBLE);
+                                holder.num.setVisibility(View.INVISIBLE);
+                            }
+                        }
+                    }
+                });
             }
         }
     }

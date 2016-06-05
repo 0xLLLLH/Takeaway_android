@@ -1,13 +1,17 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.xllllh.android.takeaway.DishListFragment">
 
     <se.emilsjolander.stickylistheaders.StickyListHeadersListView
         android:id="@+id/dish_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
         android:drawSelectorOnTop="true"
         android:scrollbarStyle="outsideOverlay"
         android:fastScrollEnabled="true"
@@ -16,5 +20,19 @@
         android:dividerHeight="1px"
         style="StickListView">
     </se.emilsjolander.stickylistheaders.StickyListHeadersListView>
-
-</FrameLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:elevation="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tab_height"
+        android:background="@android:color/white">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorDarkGrey"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="购物车空空如也"/>
+    </LinearLayout>
+</LinearLayout>

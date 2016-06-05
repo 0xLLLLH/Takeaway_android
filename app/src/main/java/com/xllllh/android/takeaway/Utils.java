@@ -212,6 +212,7 @@ public class Utils {
         String ret = defaultValue;
         try {
             ret = jsonObject.get(key).toString();
+
         }catch (Exception e) {
             Log.d("Utils",String.format("Unable to get %s from JSON object",key));
             e.printStackTrace();
