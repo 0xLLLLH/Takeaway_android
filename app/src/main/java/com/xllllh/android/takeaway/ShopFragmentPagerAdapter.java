@@ -35,9 +35,9 @@ public class ShopFragmentPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return DishListFragment.newInstance(shopId,price2send);
             case 1:
-                return OrderListFragment.newInstance();
+                return ShopCommentFragment.newInstance(shopId);
             case 2:
-                return UsercenterFragment.newInstance();
+                return ShopInfoFragment.newInstance();
             default:
                 Log.d("FragmentPagerAdapter", "Can't find corresponding fragment at position " + position);
                 return new Fragment();

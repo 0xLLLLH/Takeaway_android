@@ -82,4 +82,14 @@ public class ShopUtils {
             return dishList;
         }
     }
+
+    public static class Comments {
+
+        public static List<JSONObject> getCommentList(String shop_id) {
+            List<JSONObject> list = new ArrayList<>();
+            list = Utils.connectAndGetJSONList("http://dirtytao.com/androidAPI/Store/storedish",
+                    "POST",String.format("sid=%s",shop_id));
+            return list;
+        }
+    }
 }
