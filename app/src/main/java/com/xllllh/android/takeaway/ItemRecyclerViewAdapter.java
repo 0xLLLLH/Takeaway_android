@@ -67,10 +67,12 @@ implements View.OnClickListener{
             mHolder.mItem = mValues.get(position);
             mHolder.mView.setTag(mHolder.mItem);
             try {
-                mHolder.mShopName.setText(mHolder.mItem.getString("shop_name"));
-                mHolder.mShopRating.setRating((float) mHolder.mItem.getDouble("score"));
-                mHolder.mShopSold.setText(String.format("月售%s单", mHolder.mItem.getString("sell_num")));
-                int sendTime = mHolder.mItem.getInt("ave_sendtime");
+                mHolder.mShopName.setText(Utils.getValueFromJSONObject(mHolder.mItem,"shop_name","shop_name"));
+                mHolder.mShopRating.setRating(
+                        Float.parseFloat(Utils.getValueFromJSONObject(mHolder.mItem,"score","0.0")));
+                mHolder.mShopSold.setText(String.format("月售%s单",
+                        Utils.getValueFromJSONObject(mHolder.mItem, "sell_num","0")));
+                int sendTime = Integer.parseInt(Utils.getValueFromJSONObject(mHolder.mItem,"ave_sendtime","0"));
                 StringBuilder builder = new StringBuilder();
                 if (sendTime/60 > 0)
                     builder.append(String.format("%d小时",sendTime/60));
@@ -78,7 +80,7 @@ implements View.OnClickListener{
                 mHolder.mShopSendTime.setText(builder.toString());
                 mHolder.mShopPriceToSend.setText(String.format("起送价￥%d", mHolder.mItem.getInt("price_tosend")));
                 mHolder.mShopSendFee.setText(String.format("配送费￥0"));
-                String[] discount = mHolder.mItem.getString("discount").split("-");
+                String[] discount = Utils.getValueFromJSONObject(mHolder.mItem,"discount","10-0").split("-");
                 if (discount.length == 2) {
                     mHolder.mShopDiscount.setText(String.format("满%s减%s", discount[0], discount[1]));
                 } else {

@@ -92,7 +92,6 @@ public class HomeFragment extends Fragment {
         myItemRecyclerViewAdapter.setOnItemClickListener(new ItemRecyclerViewAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, JSONObject data) {
-                Toast.makeText(getActivity(),"click",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(),ShopActivity.class);
                 intent.putExtra("json",data.toString());
                 startActivity(intent);

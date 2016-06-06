@@ -66,15 +66,16 @@
                     android:layout_margin="2dp"
                     android:padding="4dp"/>
                 <TextView
-                    android:id="@+id/shop_detail_name"
+                    android:id="@+id/shop_name"
                     android:layout_toEndOf="@id/shop_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="店铺名"
                     android:padding="5dp"/>
                 <TextView
+                    android:id="@+id/shop_notice"
                     android:layout_toEndOf="@id/shop_image"
-                    android:layout_below="@id/shop_detail_name"
+                    android:layout_below="@id/shop_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="10sp"
@@ -86,7 +87,7 @@
                 android:layout_height="1dp"
                 android:background="@color/colorGrey"/>
             <TextView
-                android:id="@+id/shop_detail_discount"
+                android:id="@+id/shop_discount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableStart="@mipmap/tf"

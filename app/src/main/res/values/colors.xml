@@ -7,6 +7,6 @@
     <color name="colorTextInPrimaryColor">#8B6914</color>
     <color name="colorTextDefault">#333333</color>
     <color name="colorGrey">#eeeeee</color>
-    <color name="colorDarkGrey">#898989</color>
+    <color name="colorDarkGrey">#c9c9c9</color>
     <color name="colorTabBackground">@android:color/white</color>
 </resources>

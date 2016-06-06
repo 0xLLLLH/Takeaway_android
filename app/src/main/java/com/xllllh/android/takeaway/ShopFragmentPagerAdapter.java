@@ -20,18 +20,20 @@ public class ShopFragmentPagerAdapter extends FragmentPagerAdapter {
     private Context context;
     private int mChildCount;
     private String shopId;
+    private String price2send;
 
-    public ShopFragmentPagerAdapter(FragmentManager fm, Context context, String shopId) {
+    public ShopFragmentPagerAdapter(FragmentManager fm, Context context, String shopId, String price2send) {
         super(fm);
         this.context = context;
         this.shopId = shopId;
+        this.price2send = price2send;
     }
 
     @Override
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return DishListFragment.newInstance(shopId);
+                return DishListFragment.newInstance(shopId,price2send);
             case 1:
                 return OrderListFragment.newInstance();
             case 2:
