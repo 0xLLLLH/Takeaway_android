@@ -87,7 +87,7 @@ public class ShopUtils {
 
         public static List<JSONObject> getCommentList(String shop_id) {
             List<JSONObject> list = new ArrayList<>();
-            list = Utils.connectAndGetJSONList("http://dirtytao.com/androidAPI/Store/storedish",
+            list = Utils.connectAndGetJSONList("http://dirtytao.com/androidAPI/Store/comments",
                     "POST",String.format("sid=%s",shop_id));
             return list;
         }
