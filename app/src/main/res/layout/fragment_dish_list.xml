@@ -37,7 +37,7 @@
             android:layout_height="match_parent">
             <ImageView
                 android:id="@+id/cart_image"
-                android:layout_marginTop="-25dp"
+                android:layout_marginTop="-20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_width="60dp"

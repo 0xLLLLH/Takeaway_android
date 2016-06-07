@@ -42,7 +42,7 @@ public class TopBar extends RelativeLayout {
         //get attrs of title
         mTitleIcon = typedArray.getDrawable(R.styleable.TopBar_titleIcon);
         mTitleText = typedArray.getString(R.styleable.TopBar_titleText);
-        mTitleTextSize = typedArray.getDimension(R.styleable.TopBar_titleTextSize, 10);
+        mTitleTextSize = typedArray.getDimension(R.styleable.TopBar_titleTextSize, R.dimen.topbar_title_text_size);
         mTitleTextColor = typedArray.getColor(R.styleable.TopBar_textColor, 0);
         mTitleBackground = typedArray.getDrawable(R.styleable.TopBar_titleBackground);
 
@@ -50,7 +50,7 @@ public class TopBar extends RelativeLayout {
         mShowMenu = typedArray.getBoolean(R.styleable.TopBar_showMenu,false);
         mMenuIcon = typedArray.getDrawable(R.styleable.TopBar_menuIcon);
         mMenuText = typedArray.getString(R.styleable.TopBar_menuText);
-        mMenuTextSize = typedArray.getDimension(R.styleable.TopBar_menuTextSize, 10);
+        mMenuTextSize = typedArray.getDimension(R.styleable.TopBar_menuTextSize, R.dimen.topbar_menu_text_size);
         mMenuTextColor = typedArray.getColor(R.styleable.TopBar_textColor, 0);
         mMenuBackground = typedArray.getDrawable(R.styleable.TopBar_menuBackground);
 

@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.xllllh.android.takeaway.NewOrderActivity">
 
-</RelativeLayout>
+    <com.xllllh.android.takeaway.TopBar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topbar_height"
+        app:titleIcon="@mipmap/arrow_left"
+        app:titleText="提交订单"
+        app:titleTextSize="@dimen/topbar_title_text_size"
+        app:titleBackground="@null"
+        app:showMenu="false"
+        app:textColor="@color/colorTextDefault"
+        android:background="@android:color/white"
+        android:elevation="2dp">
+    </com.xllllh.android.takeaway.TopBar>
+
+
+</LinearLayout>

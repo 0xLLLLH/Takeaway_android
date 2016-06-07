@@ -102,7 +102,7 @@
             style="@style/ShopTabLayout"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:elevation="1dp"/>
+            android:elevation="2dp"/>
         <android.support.v4.view.ViewPager
             android:id="@+id/shopPager"
             android:layout_width="match_parent"
