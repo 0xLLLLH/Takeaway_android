@@ -3,9 +3,9 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorPrimary">@color/colorPrimary</item>
+        <item name="android:colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
         <item name="android:textColorPrimary">@color/colorTextInPrimaryColor</item>
         <item name="android:textColor">@color/colorTextDefault</item>
         <item name="stickyListHeadersListViewStyle">@style/StickListView</item>
@@ -29,5 +29,9 @@
     <style name="StickListView" parent="@android:style/Widget.ListView">
         <item name="android:paddingLeft">0dp</item>
         <item name="android:paddingRight">0dp  </item>
+    </style>
+    <style name="RatingBar" parent="@android:style/Widget.Material.RatingBar.Small">
+        <item name="android:stepSize">0.5</item>
+        <item name="android:isIndicator">true</item>
     </style>
 </resources>

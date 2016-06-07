@@ -57,7 +57,6 @@ public class StickListAdapter extends BaseAdapter implements StickyListHeadersAd
             holder = new ViewHolder();
             convertView = inflater.inflate(R.layout.dish_list_item_layout, parent, false);
             holder.title = (TextView) convertView.findViewById(R.id.dish_title);
-            holder.discription = (TextView) convertView.findViewById(R.id.dish_description);
             holder.sold = (TextView) convertView.findViewById(R.id.dish_sold);
             holder.price = (TextView) convertView.findViewById(R.id.dish_price);
             holder.minus = (TextView) convertView.findViewById(R.id.dish_minus);
@@ -69,7 +68,6 @@ public class StickListAdapter extends BaseAdapter implements StickyListHeadersAd
         }
 
         holder.title.setText(Utils.getValueFromJSONObject(dishList.get(position),"dish_name","dish_name"));
-        holder.discription.setText(dishList.get(position).toString());
         holder.sold.setText(String.format("月售%s单",
                 Utils.getValueFromJSONObject(dishList.get(position),"sell_num","sell_num")));
         holder.price.setText(String.format("￥%s",
@@ -125,7 +123,7 @@ public class StickListAdapter extends BaseAdapter implements StickyListHeadersAd
     }
 
     public class ViewHolder {
-        TextView title, discription, sold, plus, num, minus, price;
+        TextView title, sold, plus, num, minus, price;
     }
 
     public interface ButtonOnClickListener{

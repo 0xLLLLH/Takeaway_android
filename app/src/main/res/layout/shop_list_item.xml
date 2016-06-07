@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:numStars="5"
                 android:isIndicator="true"
-                style="@style/Base.Widget.AppCompat.RatingBar.Small"
+                style="@style/RatingBar"
                 android:rating="5"/>
             <TextView
                 android:id="@+id/shop_sold"

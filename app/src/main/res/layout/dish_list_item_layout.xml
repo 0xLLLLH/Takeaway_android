@@ -22,12 +22,6 @@
             android:textSize="16sp"
             android:text="这是标题"/>
         <TextView
-            android:id="@+id/dish_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorDarkGrey"
-            android:text="文字介绍"/>
-        <TextView
             android:id="@+id/dish_sold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
