@@ -12,4 +12,5 @@
     <dimen name="tab_text_size">12sp</dimen>
     <dimen name="tab_max_width">1000dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="content_block_height">35dp</dimen>
 </resources>

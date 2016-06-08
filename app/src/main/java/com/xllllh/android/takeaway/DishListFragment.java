@@ -40,7 +40,9 @@ public class DishListFragment extends Fragment {
     private ImageView cart_image;
     private TextView cart_price;
     private Button cart_button;
-    private int priceSum;
+    private float priceSum;
+    private HashMap<String, Integer> cart_dishes = new HashMap<>();
+    private HashMap<String, String> dish_json = new HashMap<>();
 
     public DishListFragment() {
         // Required empty public constructor
@@ -88,6 +90,8 @@ public class DishListFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),NewOrderActivity.class);
+                intent.putExtra("dish_count",cart_dishes);
+                intent.putExtra("dish_json",dish_json);
                 startActivity(intent);
             }
         });
@@ -95,17 +99,30 @@ public class DishListFragment extends Fragment {
         return view;
     }
 
-    protected void cartAddItem(int price) {
+    protected void cartAddItem(String id,JSONObject dish,float price) {
+        if (!dish_json.containsKey(id))
+            dish_json.put(id,dish.toString());
+        if (cart_dishes.containsKey(id)) {
+            int cnt = cart_dishes.get(id);
+            cart_dishes.remove(id);
+            cart_dishes.put(id,cnt+1);
+        }
+        else {
+            cart_dishes.put(id,1);
+        }
         priceSum += price;
-        cart_price.setText(String.format("￥%d",priceSum));
+        cart_price.setText(String.format("￥%f",priceSum));
         setCartImage();
         setCartButton();
     }
 
-    protected void cartRemoveItem(int price) {
+    protected void cartRemoveItem(String id,float price) {
+        int cnt = cart_dishes.get(id);
+        cart_dishes.remove(id);
+        cart_dishes.put(id,cnt-1);
         priceSum -= price;
         if (priceSum > 0)
-            cart_price.setText(String.format("￥%d",priceSum));
+            cart_price.setText(String.format("￥%f",priceSum));
         else
             cart_price.setText(R.string.cart_no_dish);
         setCartImage();
@@ -177,7 +194,8 @@ public class DishListFragment extends Fragment {
                         numInt++;
                         holder.num.setText(numInt.toString());
                         holder.num.setVisibility(View.VISIBLE);
-                        cartAddItem(Integer.parseInt(Utils.getValueFromJSONObject(dish,"price","0")));
+                        cartAddItem(Utils.getValueFromJSONObject(dish,"id","0"), dish,
+                                Float.parseFloat(Utils.getValueFromJSONObject(dish,"price","0")));
                     }
 
                     @Override
@@ -192,7 +210,8 @@ public class DishListFragment extends Fragment {
                                 holder.minus.setVisibility(View.INVISIBLE);
                                 holder.num.setVisibility(View.INVISIBLE);
                             }
-                            cartRemoveItem(Integer.parseInt(Utils.getValueFromJSONObject(dish,"price","0")));
+                            cartRemoveItem(Utils.getValueFromJSONObject(dish,"id","0"),
+                                    Float.parseFloat(Utils.getValueFromJSONObject(dish,"price","0")));
                         }
 
                     }

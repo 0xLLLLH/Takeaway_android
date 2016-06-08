@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:paddingStart="@dimen/text_margin"
+        android:paddingEnd="@dimen/text_margin"
+        android:gravity="center_vertical"
+        android:layout_height="@dimen/content_block_height"
+        android:elevation="2dp"
+        android:background="@android:color/white">
+
+    <TextView
+        android:id="@+id/order_dish_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:text="菜名"/>
+    <TextView
+        android:id="@+id/order_dish_count"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="x1"/>
+    <TextView
+        android:id="@+id/order_dish_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="￥15"
+        android:textAlignment="textEnd"/>
+
+    </LinearLayout>
+</LinearLayout>
