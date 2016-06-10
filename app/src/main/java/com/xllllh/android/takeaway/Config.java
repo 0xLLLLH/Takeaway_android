@@ -22,6 +22,7 @@ public class Config extends Application {
                 //init util classes
                 UserUtils.init(getApplicationContext());
                 ShopUtils.ShopList.init();
+                AddressUtils.Init();
             }
         }).start();
     }

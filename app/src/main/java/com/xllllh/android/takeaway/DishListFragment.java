@@ -30,13 +30,15 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
  * create an instance of this fragment.
  */
 public class DishListFragment extends Fragment {
-    private static final String ARG_SHOP_ID = "shopId";
-    private static final String ARG_PRICE_SEND = "price2Send";
+    private static final String ARG_SHOP_JSON = "shop_json";
 
     private StickyListHeadersListView stickyList;
 
+    private JSONObject shop_json;
     private String shopId;
     private String price2Send;
+    private Float price2Discount;
+    private Float discount;
     private ImageView cart_image;
     private TextView cart_price;
     private Button cart_button;
@@ -51,15 +53,13 @@ public class DishListFragment extends Fragment {
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
-     * @param shopId shop id.
-     * @param price2Send price start send.
+     * @param shop_json JSON Object of shop.
      * @return A new instance of fragment DishListFragment.
      */
-    public static DishListFragment newInstance(String shopId,String price2Send) {
+    public static DishListFragment newInstance(JSONObject shop_json) {
         DishListFragment fragment = new DishListFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_SHOP_ID, shopId);
-        args.putString(ARG_PRICE_SEND,price2Send);
+        args.putString(ARG_SHOP_JSON, shop_json.toString());
         fragment.setArguments(args);
         return fragment;
     }
@@ -68,8 +68,16 @@ public class DishListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            shopId = getArguments().getString(ARG_SHOP_ID);
-            price2Send = getArguments().getString(ARG_PRICE_SEND);
+            try {
+                shop_json = new JSONObject(getArguments().getString(ARG_SHOP_JSON));
+                shopId = Utils.getValueFromJSONObject(shop_json,"id","0");
+                price2Send = Utils.getValueFromJSONObject(shop_json, "price_tosend","1");
+                String []dis =Utils.getValueFromJSONObject(shop_json,"discount","10-0").split("-");
+                price2Discount = Float.parseFloat(dis[0]);
+                discount = Float.parseFloat(dis[1]);
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         priceSum = 0;
         LoadShopDetailTask detailTask = new LoadShopDetailTask(shopId);
@@ -92,6 +100,11 @@ public class DishListFragment extends Fragment {
                 Intent intent = new Intent(getActivity(),NewOrderActivity.class);
                 intent.putExtra("dish_count",cart_dishes);
                 intent.putExtra("dish_json",dish_json);
+                if (priceSum >= price2Discount) {
+                    intent.putExtra("discount", discount.toString());
+                }
+                else
+                    intent.putExtra("discount","不满足优惠要求");
                 startActivity(intent);
             }
         });
@@ -111,7 +124,7 @@ public class DishListFragment extends Fragment {
             cart_dishes.put(id,1);
         }
         priceSum += price;
-        cart_price.setText(String.format("￥%f",priceSum));
+        cart_price.setText(String.format("￥%.2f",priceSum));
         setCartImage();
         setCartButton();
     }
@@ -122,7 +135,7 @@ public class DishListFragment extends Fragment {
         cart_dishes.put(id,cnt-1);
         priceSum -= price;
         if (priceSum > 0)
-            cart_price.setText(String.format("￥%f",priceSum));
+            cart_price.setText(String.format("￥%.2f",priceSum));
         else
             cart_price.setText(R.string.cart_no_dish);
         setCartImage();

@@ -66,7 +66,7 @@ public class UserUtils{
         return false;
     }
 
-    private static void setUsername(String username) {
+    public static void setUsername(String username) {
         SharedPreferences.Editor editor = context.getSharedPreferences("AccountInfo", Context.MODE_PRIVATE).edit();
         editor.clear();
         mUsername = null;
@@ -77,7 +77,7 @@ public class UserUtils{
         editor.commit();
     }
 
-    private static String getUsername() {
+    public static String getUsername() {
         SharedPreferences preferences = context.getSharedPreferences("AccountInfo", Context.MODE_PRIVATE);
         return preferences.getString("username",null);
     }

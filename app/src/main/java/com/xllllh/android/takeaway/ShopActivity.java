@@ -39,7 +39,7 @@ public class ShopActivity extends FragmentActivity {
         shopId = Utils.getValueFromJSONObject(shopJSON,"id","0");
 
         ShopFragmentPagerAdapter adapter = new ShopFragmentPagerAdapter(getSupportFragmentManager(),
-                this,shopId,Utils.getValueFromJSONObject(shopJSON,"price_tosend","1"));
+                this,shopJSON);
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(3);
         tabLayout.setupWithViewPager(viewPager);

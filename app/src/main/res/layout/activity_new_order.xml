@@ -37,6 +37,7 @@
             android:layout_height="wrap_content"
             android:minHeight="@dimen/content_block_height">
             <TextView
+                android:id="@+id/order_address"
                 android:layout_gravity="center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -44,11 +45,39 @@
                 android:drawableRight="@mipmap/menu_arrow_right"/>
         </LinearLayout>
         <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/white"
+            android:src="@color/colorDarkGrey"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:elevation="2dp"/>
+        <LinearLayout
+            android:gravity="center"
+            android:elevation="2dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:paddingStart="@dimen/text_margin"
+            android:paddingEnd="@dimen/text_margin"
+            android:layout_height="@dimen/content_block_height">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="送达时间"
+                android:layout_weight="3"/>
+            <Spinner
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <ImageView
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="0dp" />
         <LinearLayout
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:elevation="2dp"
             android:background="@android:color/white"
             android:orientation="horizontal"
@@ -57,6 +86,7 @@
             android:paddingEnd="@dimen/text_margin"
             android:layout_height="@dimen/content_block_height">
             <CheckedTextView
+                android:id="@+id/payment_type_0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="在线付款"
@@ -72,7 +102,7 @@
             android:paddingEnd="10dp"
             android:elevation="2dp"/>
         <LinearLayout
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:elevation="2dp"
             android:background="@android:color/white"
             android:orientation="horizontal"
@@ -81,6 +111,7 @@
             android:paddingEnd="@dimen/text_margin"
             android:layout_height="@dimen/content_block_height">
             <CheckedTextView
+                android:id="@+id/payment_type_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="货到付款"
@@ -92,7 +123,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp" />
         <LinearLayout
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:elevation="2dp"
             android:background="@android:color/white"
             android:orientation="horizontal"
@@ -101,34 +132,7 @@
             android:paddingEnd="@dimen/text_margin"
             android:layout_height="@dimen/content_block_height">
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="送达时间"
-                android:layout_weight="1"/>
-            <Spinner
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/spinner"
-                android:layout_weight="1" />
-        </LinearLayout>
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/white"
-            android:src="@color/colorDarkGrey"
-            android:paddingStart="@dimen/text_margin"
-            android:paddingEnd="@dimen/text_margin"
-            android:elevation="2dp"/>
-        <LinearLayout
-            android:gravity="center_vertical"
-            android:elevation="2dp"
-            android:background="@android:color/white"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:paddingStart="@dimen/text_margin"
-            android:paddingEnd="@dimen/text_margin"
-            android:layout_height="@dimen/content_block_height">
-            <TextView
+                android:id="@+id/remark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="备注"
@@ -138,6 +142,27 @@
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="0dp" />
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/content_block_height"
+            android:background="@android:color/white"
+            android:paddingStart="@dimen/text_margin"
+            android:paddingEnd="@dimen/text_margin"
+            android:elevation="2dp">
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="店铺名"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="由商家配送"
+                android:textColor="@color/colorDarkGrey"/>
+        </LinearLayout>
         <LinearLayout
             android:id="@+id/order_dish_list"
             android:orientation="vertical"
@@ -155,12 +180,14 @@
         android:background="@android:color/white"
         android:gravity="center_vertical">
         <TextView
+            android:id="@+id/order_discount"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="已优惠￥15"
             android:textAlignment="center"/>
         <TextView
+            android:id="@+id/order_price_sum"
             android:layout_marginEnd="20dp"
             android:layout_weight="1"
             android:layout_width="0dp"
@@ -169,6 +196,7 @@
             android:textAlignment="textEnd"
             android:textSize="16sp"/>
         <Button
+            android:id="@+id/button_order"
             android:layout_width="90dp"
             android:layout_height="match_parent"
             android:text="立即下单"

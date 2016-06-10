@@ -54,10 +54,17 @@ public class ShopUtils {
 
     public static class Shop {
 
+        static JSONObject shop_json;
+
+        public static JSONObject getShop_json() {
+            return shop_json;
+        }
+
         public static JSONObject getShopDetail(String shop_id){
             JSONObject detail = null;
             detail = Utils.connectAndGetJSONObject("http://dirtytao.com/androidAPI/Store/storedetail",
                     "POST",String.format("sid=%s",shop_id));
+            shop_json = detail;
             return detail;
         }
 

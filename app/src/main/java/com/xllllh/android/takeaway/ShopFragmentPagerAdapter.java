@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONObject;
+
 /**
  * Created by 0xLLLLH on 16-6-1.
  *
@@ -21,19 +23,21 @@ public class ShopFragmentPagerAdapter extends FragmentPagerAdapter {
     private int mChildCount;
     private String shopId;
     private String price2send;
+    private JSONObject shop_json ;
 
-    public ShopFragmentPagerAdapter(FragmentManager fm, Context context, String shopId, String price2send) {
+    public ShopFragmentPagerAdapter(FragmentManager fm, Context context, JSONObject shop_json) {
         super(fm);
         this.context = context;
-        this.shopId = shopId;
-        this.price2send = price2send;
+        this.shop_json = shop_json;
+        this.shopId = Utils.getValueFromJSONObject(shop_json,"id","0");
+        this.price2send = Utils.getValueFromJSONObject(shop_json,"price_tosend","1");
     }
 
     @Override
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return DishListFragment.newInstance(shopId,price2send);
+                return DishListFragment.newInstance(shop_json);
             case 1:
                 return ShopCommentFragment.newInstance(shopId);
             case 2:

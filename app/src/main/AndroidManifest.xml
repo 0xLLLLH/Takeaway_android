@@ -22,7 +22,8 @@
         <activity android:name=".SignupActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".ShopActivity" />
-        <activity android:name=".NewOrderActivity"></activity>
+        <activity android:name=".NewOrderActivity" />
+        <activity android:name=".OrderDetailActivity"></activity>
     </application>
 
 </manifest>
