@@ -4,6 +4,8 @@ package com.xllllh.android.takeaway;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,7 @@ import android.widget.Toast;
 public class OrderListFragment extends Fragment {
 
     Button login;
+    RecyclerView orderList;
 
     public OrderListFragment() {
         // Required empty public constructor
@@ -51,15 +54,26 @@ public class OrderListFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_order_list, container, false);
 
-        //TODO: check if user is login and hide view
-        login = (Button)view.findViewById(R.id.order_list_login);
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),LoginActivity.class);
-                startActivity(intent);
-            }
-        });
+        if (UserUtils.isLogined()) {
+            view.findViewById(R.id.view_not_login).setVisibility(View.GONE);
+            view.findViewById(R.id.view_order_list).setVisibility(View.VISIBLE);
+            orderList = (RecyclerView) view.findViewById(R.id.order_list);
+            OrderListRecyclerViewAdapter adapter = new OrderListRecyclerViewAdapter(ShopUtils.ShopList.initialContents);
+            orderList.setAdapter(adapter);
+            orderList.setLayoutManager( new LinearLayoutManager(getActivity()));
+        } else {
+            view.findViewById(R.id.view_not_login).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.view_order_list).setVisibility(View.GONE);
+
+            login = (Button) view.findViewById(R.id.order_list_login);
+            login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
         return view;
     }
 }

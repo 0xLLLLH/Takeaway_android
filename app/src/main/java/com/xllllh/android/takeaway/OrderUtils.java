@@ -2,6 +2,8 @@ package com.xllllh.android.takeaway;
 
 import org.json.JSONObject;
 
+import java.util.List;
+
 /**
  * Created by 0xLLLLH on 16-6-9.
  *
@@ -17,5 +19,11 @@ public class OrderUtils {
                             "&remark=%s&payment_type=%s&discount_result=%s&total_price=%s"
                             ,username,address_id,store_id,dish_id_string,remark,payment_type,
                             discount_result,total_price));
+    }
+
+    static List<JSONObject> getOrderList(String username, String status) {
+        return Utils.connectAndGetJSONList("http://dirtytao.com/androidAPI/Order/add",
+                "POST",
+                String.format("username=%s&state=%s",username,status));
     }
 }
