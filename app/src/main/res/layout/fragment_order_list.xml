@@ -42,12 +42,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone">
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/order_list"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/order_refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/order_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        </android.support.v7.widget.RecyclerView>
+            </android.support.v7.widget.RecyclerView>
+        </android.support.v4.widget.SwipeRefreshLayout>
     </LinearLayout>
 
 

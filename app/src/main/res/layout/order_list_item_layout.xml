@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:layout_marginBottom="10dp">
     <LinearLayout
         android:orientation="horizontal"
         android:padding="10dp"
@@ -11,17 +12,23 @@
         android:layout_height="wrap_content"
         android:elevation="2dp">
         <TextView
+            android:id="@+id/order_shop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="店铺名"
             android:drawableRight="@mipmap/menu_arrow_right"/>
         <TextView
+            android:id="@+id/order_status"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:textAlignment="textEnd"
             android:text="订单状态"/>
     </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorGrey"/>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -71,9 +78,10 @@
             android:layout_height="wrap_content"
             android:gravity="right">
             <Button
+                android:id="@+id/order_confirm"
                 android:layout_width="60dp"
                 android:layout_height="25dp"
-                android:text="支付"
+                android:text="确认送达"
                 android:textColor="@color/colorTextInPrimaryColor"
                 android:background="@drawable/round_corner"/>
         </LinearLayout>

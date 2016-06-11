@@ -10,6 +10,8 @@ import java.util.List;
  */
 public class OrderUtils {
 
+    static final String STATE_ALL = "0";
+
     static JSONObject createNewOrder(String username, String address_id, String store_id,
                                      String dish_id_string, String remark, String payment_type,
                                      String discount_result, String total_price) {
@@ -22,7 +24,7 @@ public class OrderUtils {
     }
 
     static List<JSONObject> getOrderList(String username, String status) {
-        return Utils.connectAndGetJSONList("http://dirtytao.com/androidAPI/Order/add",
+        return Utils.connectAndGetJSONList("http://dirtytao.com/androidAPI/Order/orderlist",
                 "POST",
                 String.format("username=%s&state=%s",username,status));
     }

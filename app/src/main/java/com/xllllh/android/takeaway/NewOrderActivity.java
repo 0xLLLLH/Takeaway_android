@@ -3,7 +3,6 @@ package com.xllllh.android.takeaway;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +20,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 
 public class NewOrderActivity extends Activity {
 
@@ -35,7 +33,7 @@ public class NewOrderActivity extends Activity {
     private Button orderButton;
     private Spinner spinner;
     private CheckedTextView payment0,payment1;
-    private String paymentType,address_id,dish_stirng,remarks;
+    private String paymentType,address_id, dish_string,remarks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,9 +167,15 @@ public class NewOrderActivity extends Activity {
 
         @Override
         protected Boolean doInBackground(Void... params) {
+            dish_string = "";
+            for (HashMap.Entry<String,Integer> entry:dishCount.entrySet()) {
+                if (dish_string.equals(""))
+                    dish_string +="-";
+                dish_string +=String.format("%s:%s",entry.getKey(),entry.getValue().toString());
+            }
             result = OrderUtils.createNewOrder(UserUtils.getUsername(),address_id,
                     Utils.getValueFromJSONObject(ShopUtils.Shop.getShop_json(),"id","0"),
-                    dish_stirng,remarks,paymentType,discount,String.format("%.2f", priceSum));
+                    dish_string,remarks,paymentType,discount,String.format("%.2f", priceSum));
             return Utils.getValueFromJSONObject(result,"status","fail").equals("success");
         }
 

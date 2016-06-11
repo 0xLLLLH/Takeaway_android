@@ -142,11 +142,6 @@ public class SignupActivity extends Activity {
     }
 
     private void showProgress(boolean show){
-        //自己的progressbar
-        //mFormView.setVisibility(show?View.GONE:View.VISIBLE);
-        //mProgressView.setVisibility(show?View.VISIBLE:View.GONE);
-
-        //TODO：此处ProgressDialog太丑，需要改为自己的progressbar
         if (show) {
             dialog=new ProgressDialog(this);
             dialog.setCancelable(false);
