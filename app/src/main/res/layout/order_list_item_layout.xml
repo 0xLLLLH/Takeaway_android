@@ -78,6 +78,23 @@
             android:layout_height="wrap_content"
             android:gravity="right">
             <Button
+                android:visibility="gone"
+                android:id="@+id/order_cancel"
+                android:layout_width="60dp"
+                android:layout_height="25dp"
+                android:text="取消订单"
+                android:background="@drawable/round_corner"
+                android:backgroundTint="@color/colorGrey"/>
+            <Button
+                android:visibility="gone"
+                android:id="@+id/order_pay"
+                android:layout_width="60dp"
+                android:layout_height="25dp"
+                android:text="付款"
+                android:textColor="@color/colorTextInPrimaryColor"
+                android:background="@drawable/round_corner"/>
+            <Button
+                android:visibility="gone"
                 android:id="@+id/order_confirm"
                 android:layout_width="60dp"
                 android:layout_height="25dp"

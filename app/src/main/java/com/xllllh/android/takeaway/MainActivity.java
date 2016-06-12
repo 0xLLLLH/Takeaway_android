@@ -17,7 +17,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final int defaultTabIndex = 0;
+    private int defaultTabIndex = 0;
     ViewPager viewPager;
     TabLayout tabLayout;
     private int imageDefaultId[] = new int[]{R.mipmap.tab_home,R.mipmap.tab_order,R.mipmap.tab_my};
@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        defaultTabIndex=getIntent().getIntExtra("index",0);
         Log.d("debug","status:"+UserUtils.isLogined());
 
         initComponents();

@@ -183,8 +183,9 @@ public class NewOrderActivity extends Activity {
         protected void onPostExecute(Boolean aBoolean) {
             super.onPostExecute(aBoolean);
             if (aBoolean) {
-                Intent intent = new Intent(NewOrderActivity.this,OrderDetailActivity.class);
-                intent.putExtra("order_id",result.toString());
+                Intent intent = new Intent(NewOrderActivity.this,MainActivity.class);
+                //intent.putExtra("order_id",result.toString());
+                intent.putExtra("index",1);
                 startActivity(intent);
             }
             else {

@@ -28,4 +28,10 @@ public class OrderUtils {
                 "POST",
                 String.format("username=%s&state=%s",username,status));
     }
+
+    static boolean setOrderState(String orderId,String state) {
+        JSONObject response = Utils.connectAndGetJSONObject("http://dirtytao.com/androidAPI/Order/update",
+                "POST",String.format("id=%s&state=%s",orderId,state));
+        return "success".equals(Utils.getValueFromJSONObject(response,"status","fail"));
+    }
 }

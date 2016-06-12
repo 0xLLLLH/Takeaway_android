@@ -121,7 +121,7 @@ public class OrderListFragment extends Fragment {
             super.onPostExecute(aBoolean);
             dialog.dismiss();
             if (aBoolean) {
-                OrderListRecyclerViewAdapter adapter = new OrderListRecyclerViewAdapter(response);
+                OrderListRecyclerViewAdapter adapter = new OrderListRecyclerViewAdapter(getActivity(),response);
                 orderList.setAdapter(adapter);
                 orderList.setLayoutManager( new LinearLayoutManager(getActivity()));
             }

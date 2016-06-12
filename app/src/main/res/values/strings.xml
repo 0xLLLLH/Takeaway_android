@@ -10,7 +10,4 @@
     <string name="order_list_info_not_login">您还没有登陆，请登陆后查看订单</string>
 
     <string name="cart_no_dish">购物车空空如也~</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
