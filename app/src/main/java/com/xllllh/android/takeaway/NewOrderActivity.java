@@ -141,8 +141,13 @@ public class NewOrderActivity extends Activity {
 
         if (AddressUtils.addressList.size()>0)
         {
-            orderAddress.setText(AddressUtils.addressList.get(0).toString());
-            address_id=Utils.getValueFromJSONObject(AddressUtils.addressList.get(0),"id","0");
+            int idx =0;
+            JSONObject address_json = AddressUtils.addressList.get(idx);
+            orderAddress.setText(String.format("%s\t\t%s\n%s",
+                    address_json.optString("name").trim(),
+                    address_json.optString("phone").trim(),
+                    address_json.optString("address").trim()));
+            address_id=Utils.getValueFromJSONObject(AddressUtils.addressList.get(idx),"id","0");
         }
         else
             orderAddress.setText("暂无地址");
