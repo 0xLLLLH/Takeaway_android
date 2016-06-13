@@ -200,7 +200,7 @@ public class NewOrderActivity extends Activity {
         protected Boolean doInBackground(Void... params) {
             dish_string = "";
             for (HashMap.Entry<String,Integer> entry:dishCount.entrySet()) {
-                if (dish_string.equals(""))
+                if (!dish_string.equals(""))
                     dish_string +="-";
                 dish_string +=String.format("%s:%s",entry.getKey(),entry.getValue().toString());
             }

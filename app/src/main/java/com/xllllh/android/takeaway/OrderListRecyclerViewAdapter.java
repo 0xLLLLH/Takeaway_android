@@ -92,7 +92,6 @@ public class OrderListRecyclerViewAdapter extends RecyclerView.Adapter<OrderList
                 holder.mCancel.setVisibility(View.GONE);
                 holder.mPay.setVisibility(View.GONE);
                 holder.mConfirm.setVisibility(View.GONE);
-                Log.d("debug",holder.mItem.toString());
             }
         });
         holder.mPay.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +108,6 @@ public class OrderListRecyclerViewAdapter extends RecyclerView.Adapter<OrderList
                 holder.mCancel.setVisibility(View.GONE);
                 holder.mPay.setVisibility(View.GONE);
                 holder.mConfirm.setVisibility(View.VISIBLE);
-                Log.d("debug",holder.mItem.toString());
             }
         });
         holder.mConfirm.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +124,6 @@ public class OrderListRecyclerViewAdapter extends RecyclerView.Adapter<OrderList
                 holder.mCancel.setVisibility(View.GONE);
                 holder.mPay.setVisibility(View.GONE);
                 holder.mConfirm.setVisibility(View.GONE);
-                Log.d("debug",holder.mItem.toString());
             }
         });
     }

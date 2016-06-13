@@ -39,16 +39,17 @@ public class UserUtils{
             String status = jsonResponse.getString("status");
             Log.d("UserUtils_login:",status);
             boolean success = status.equals("success");
-            if (success)
+            if (success) {
                 setUsername(username);
 
-            //载入地址
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    AddressUtils.Init();
-                }
-            }).start();
+                //载入地址
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        AddressUtils.Init();
+                    }
+                }).start();
+            }
             return success;
         } catch (Exception e) {
             e.printStackTrace();

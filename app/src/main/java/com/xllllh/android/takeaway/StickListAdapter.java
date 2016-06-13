@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -27,11 +28,15 @@ public class StickListAdapter extends BaseAdapter implements StickyListHeadersAd
     private HashMap<String,String> headerList = new HashMap<>();
     private LayoutInflater inflater;
     private ButtonOnClickListener buttonOnClickListener;
+    private Context context;
+    private List<Integer> count;
 
-    StickListAdapter(Context context,List<JSONObject> list,HashMap<String,String> header) {
-        inflater = LayoutInflater.from(context);
-        dishList = list;
-        headerList = header;
+    StickListAdapter(Context context,List<JSONObject> list,HashMap<String,String> header,List<Integer> count) {
+        this.inflater = LayoutInflater.from(context);
+        this.context = context;
+        this.dishList = list;
+        this.headerList = header;
+        this.count = count;
     }
 
     @Override
@@ -46,7 +51,7 @@ public class StickListAdapter extends BaseAdapter implements StickyListHeadersAd
 
     @Override
     public long getItemId(int position) {
-        return position;
+        return dishList.get(position).optInt("id");
     }
 
     @Override
@@ -72,19 +77,32 @@ public class StickListAdapter extends BaseAdapter implements StickyListHeadersAd
                 Utils.getValueFromJSONObject(dishList.get(position),"sell_num","sell_num")));
         holder.price.setText(String.format("￥%s",
                 Utils.getValueFromJSONObject(dishList.get(position),"price","price")));
-
+        holder.minus.setVisibility(View.GONE);
+        holder.num.setVisibility(View.GONE);
         holder.plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (buttonOnClickListener!=null)
-                    buttonOnClickListener.plus(holder, dishList.get(position));
+                if (buttonOnClickListener != null)
+                    buttonOnClickListener.plus(position,holder, dishList.get(position));
             }
         });
-        holder.minus.setOnClickListener(new View.OnClickListener() {
+        if (count.get(position)>0) {
+            holder.minus.setVisibility(View.VISIBLE);
+            holder.minus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (buttonOnClickListener != null)
+                        buttonOnClickListener.minus(position ,holder, dishList.get(position));
+                }
+            });
+
+            holder.num.setVisibility(View.VISIBLE);
+            holder.num.setText(String.format("%d",count.get(position)));
+        }
+        convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (buttonOnClickListener!=null)
-                    buttonOnClickListener.minus(holder, dishList.get(position));
+                Toast.makeText(context,""+holder.toString(),Toast.LENGTH_SHORT).show();
             }
         });
         return convertView;
@@ -127,7 +145,7 @@ public class StickListAdapter extends BaseAdapter implements StickyListHeadersAd
     }
 
     public interface ButtonOnClickListener{
-        void plus(ViewHolder holder, JSONObject dish);
-        void minus(ViewHolder holder, JSONObject dish);
+        void plus(int position, ViewHolder holder, JSONObject dish);
+        void minus(int position, ViewHolder holder, JSONObject dish);
     }
 }

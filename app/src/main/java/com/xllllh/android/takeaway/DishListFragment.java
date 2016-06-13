@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class DishListFragment extends Fragment {
     private float priceSum;
     private HashMap<String, Integer> cart_dishes = new HashMap<>();
     private HashMap<String, String> dish_json = new HashMap<>();
-
+    private ArrayList<Integer> dishCount;
     public DishListFragment() {
         // Required empty public constructor
     }
@@ -196,39 +197,39 @@ public class DishListFragment extends Fragment {
         protected void onPostExecute(Boolean aBoolean) {
             super.onPostExecute(aBoolean);
             if (aBoolean) {
-                final StickListAdapter adapter = new StickListAdapter(getActivity(), dishList, dishType);
-                stickyList.setAdapter(adapter);
+
+                dishCount = new ArrayList<>();
+                for (int i=0;i<dishList.size();i++) {
+                    dishCount.add(0);
+                }
+                final StickListAdapter adapter = new StickListAdapter(getActivity(), dishList, dishType,dishCount);
                 adapter.setButtonOnClickListener(new StickListAdapter.ButtonOnClickListener() {
 
                     @Override
-                    public void plus(StickListAdapter.ViewHolder holder, JSONObject dish) {
-                        holder.minus.setVisibility(View.VISIBLE);
-                        Integer numInt = Integer.parseInt(holder.num.getText().toString());
+                    public void plus(int position, StickListAdapter.ViewHolder holder, JSONObject dish) {
+
+                        Integer numInt = dishCount.get(position);
                         numInt++;
-                        holder.num.setText(numInt.toString());
-                        holder.num.setVisibility(View.VISIBLE);
                         cartAddItem(Utils.getValueFromJSONObject(dish,"id","0"), dish,
                                 Float.parseFloat(Utils.getValueFromJSONObject(dish,"price","0")));
+                        dishCount.set(position,numInt);
+                        adapter.notifyDataSetChanged();
                     }
 
                     @Override
-                    public void minus(StickListAdapter.ViewHolder holder, JSONObject dish) {
-                        Integer numInt = Integer.parseInt(holder.num.getText().toString());
+                    public void minus(int position, StickListAdapter.ViewHolder holder, JSONObject dish) {
+                        Integer numInt = dishCount.get(position);
                         if (numInt>0)
                         {
                             numInt--;
-                            holder.num.setText(numInt.toString());
-                            if (numInt==0)
-                            {
-                                holder.minus.setVisibility(View.INVISIBLE);
-                                holder.num.setVisibility(View.INVISIBLE);
-                            }
                             cartRemoveItem(Utils.getValueFromJSONObject(dish,"id","0"),
                                     Float.parseFloat(Utils.getValueFromJSONObject(dish,"price","0")));
+                            dishCount.set(position,numInt);
+                            adapter.notifyDataSetChanged();
                         }
-
                     }
                 });
+                stickyList.setAdapter(adapter);
             }
         }
     }
