@@ -41,6 +41,14 @@ public class UserUtils{
             boolean success = status.equals("success");
             if (success)
                 setUsername(username);
+
+            //载入地址
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    AddressUtils.Init();
+                }
+            }).start();
             return success;
         } catch (Exception e) {
             e.printStackTrace();

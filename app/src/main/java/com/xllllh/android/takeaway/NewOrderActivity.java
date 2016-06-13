@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -23,6 +24,7 @@ import java.util.HashMap;
 
 public class NewOrderActivity extends Activity {
 
+    private final int REQUEST_ADDRESS = 1;
     private HashMap<String,Integer> dishCount;
     private HashMap<String,String> dishes;
     private String discount;
@@ -139,15 +141,27 @@ public class NewOrderActivity extends Activity {
                 android.R.layout.simple_spinner_item,timeList);
         spinner.setAdapter(adapter);
 
+        orderAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (AddressUtils.addressList.size()>0) {
+                    Intent intent = new Intent(NewOrderActivity.this,AddressListActivity.class);
+                    startActivityForResult(intent,REQUEST_ADDRESS);
+                }
+            }
+        });
+        setAddress(0);
+    }
+
+    void setAddress(int index) {
         if (AddressUtils.addressList.size()>0)
         {
-            int idx =0;
-            JSONObject address_json = AddressUtils.addressList.get(idx);
+            JSONObject address_json = AddressUtils.addressList.get(index);
             orderAddress.setText(String.format("%s\t\t%s\n%s",
                     address_json.optString("name").trim(),
                     address_json.optString("phone").trim(),
                     address_json.optString("address").trim()));
-            address_id=Utils.getValueFromJSONObject(AddressUtils.addressList.get(idx),"id","0");
+            address_id=AddressUtils.addressList.get(index).optString("id","0");
         }
         else
             orderAddress.setText("暂无地址");
@@ -166,6 +180,18 @@ public class NewOrderActivity extends Activity {
         orderRemarks = (TextView) findViewById(R.id.remark);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case REQUEST_ADDRESS :
+                if (resultCode==RESULT_OK) {
+                    setAddress(data.getIntExtra("index",0));
+                    Log.d("NewOrderActivity",data.getExtras().toString());
+                }
+                break;
+        }
+    }
+
     class NewOrderTask extends AsyncTask<Void,Void,Boolean> {
 
         private JSONObject result;
@@ -179,9 +205,9 @@ public class NewOrderActivity extends Activity {
                 dish_string +=String.format("%s:%s",entry.getKey(),entry.getValue().toString());
             }
             result = OrderUtils.createNewOrder(UserUtils.getUsername(),address_id,
-                    Utils.getValueFromJSONObject(ShopUtils.Shop.getShop_json(),"id","0"),
+                    ShopUtils.Shop.getShop_json().optString("id","0"),
                     dish_string,remarks,paymentType,discount,String.format("%.2f", priceSum));
-            return Utils.getValueFromJSONObject(result,"status","fail").equals("success");
+            return result.optString("status","fail").equals("success");
         }
 
         @Override
