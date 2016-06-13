@@ -9,7 +9,7 @@
 
 图片资源从[美团外卖APP](http://waimai.meituan.com/mobile/download/default)中解压，用于学习测试，如造成侵权请联系我删除.
 
-![预览](https://github.com/0xLLLLH/Takeaway_android/blob/50bacf7cb571c044136396c11ef6067ced2d6521/preview.gif)
+![预览](https://github.com/0xLLLLH/Takeaway_android/blob/50bacf7cb571c044136396c11ef6067ced2d6521/preview.gif?raw=true)
 
 ## 还需要填的坑
 
