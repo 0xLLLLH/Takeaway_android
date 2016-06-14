@@ -13,11 +13,11 @@
 
 ## 还需要填的坑
 
-* 
+* Activity未统一管理
 * 代码风格需要调整，多划分函数使结构清晰
 * 目前直接使用JSONObject而不是封装对应的类，不便于开发
 * UI需调整美化
-* 将Utils.getValueFromJSONObject()删去，直接使用JSONObject的opt系列方法（可选）
+* 需要将Utils.getValueFromJSONObject()删去，直接使用JSONObject的opt系列方法（可选）
 
 ## 项目中使用的开源项目
 
